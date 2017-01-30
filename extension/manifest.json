@@ -1,0 +1,13 @@
+{
+    "name": "Loadsman",
+    "version": "0.0.1",
+    "manifest_version": 2,
+    "description": "This is loadsman",
+    "permissions": ["storage"],
+    "options_page": "main.html#options",
+    "web_accessible_resources": [
+        "main.html",
+        "build/js/main.js",
+        "build/css/main.css"
+    ]
+}
