@@ -12,5 +12,5 @@
     transition: opacity 0.5s ease-out !important;
 
     /* leave opacity without !important or it will be difficult to override */
-    /*opacity: 0;*/
+    opacity: 1;
 }

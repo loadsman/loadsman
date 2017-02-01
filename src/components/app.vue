@@ -1,25 +1,23 @@
 <template>
-    <div>
-        <div id="loadsman-app" v-if="show">
-            <h2>Header</h2>
-            <vm-test-component></vm-test-component>
-            Text: {{text}}
-            <hr>
-            <a @click="show = false">Закрыть</a>
-        </div>
+    <div id="loadsman-app">
+        <h2>Header</h2>
+        <vm-test-component></vm-test-component>
+        Text: {{text}}
+        <hr>
+        <a @click="closeIframe">Закрыть</a>
     </div>
 </template>
 
 <script>
   import vmTestComponent from './test/test-component.vue'
 
-  import ChromeListener from '../ChromeListener.js'
+  import IframeListener from '../IframeListener.js'
 
   import axios from 'axios'
 
   export default {
     mounted(){
-      this.chromeListener.listen('click', () => {
+      this.iframeListener.listen('click', () => {
         this.show = !this.show
       })
 
@@ -34,13 +32,20 @@
     },
     data (){
       return {
-        chromeListener: new ChromeListener,
+        iframeListener: new IframeListener,
         text: 'Some text',
-        show: false,
       }
     },
     components: {
       vmTestComponent,
+    },
+    methods: {
+      closeIframe (){
+        parent.postMessage({
+          from: 'loadsmanIframe',
+          command: 'closeIframe'
+        }, '*')
+      },
     },
   }
 </script>

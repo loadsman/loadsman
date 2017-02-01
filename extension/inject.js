@@ -1,36 +1,61 @@
 (function (document, chrome) {
-  var frame = document.createElement('iframe')
-  var extensionBaseURL = 'chrome-extension://' + chrome.runtime.id
+  var frame
 
-  document.getElementsByTagName("BODY")[0].appendChild(frame)
+    // NOTE Conceptually, it's better to check for exception id for security reasons.
+  // But it's kinda complicated so I just pass name to avoid conflicts.
 
-  // Avoid troubles with framesets by working with body only:
-  if (document.body.nodeName !== 'BODY') {
-    return;
+  // we proxy message from loadsman extension to loadsman iframe and backwards.
+  // loadsman-extension -> loadsman-iframe
+    chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
+      if (data.from !== 'loadsmanExtension'){
+        return
+      }
+
+      if (data.command === 'closeIframe'){
+        toggleIframe()
+      }
+
+      if (frame){
+        frame.contentWindow.postMessage(data, '*')
+      }
+    })
+
+  // loadsma-iframe -> loadsman-extension
+  window.addEventListener('message', (event) => {
+    var data = event.data
+    if (data.from !== 'loadsmanIframe'){
+      return
+    }
+
+    if (data.command === 'closeIframe'){
+      toggleIframe()
+    }
+
+    chrome.runtime.sendMessage(data);
+  })
+
+  function toggleIframe(){
+    frame ? removeIframe() : appendIframe()
   }
 
-  // Configure the frame:
-  frame.id = 'loadsman-iframe'
-  frame.srcdoc = `
-  <!DOCTYPE html>
-<html lang="en">
-<head>
-    <title>Loadsman</title>
+  function removeIframe(){
+    document.body.removeChild(frame)
+    frame = null
+  }
 
-    <link rel="stylesheet" type="text/css" href="` + extensionBaseURL +`/build/css/main.css">
-</head>
-<body>
+  function appendIframe(){
+    frame = document.createElement('iframe')
+    // Configure the frame:
+    frame.id = 'loadsman-iframe'
+    // Explicitly set border width to avoid flashing of the iframe:
+    frame.style.borderWidth = 0
+    frame.src = chrome.runtime.getURL('main.html')
 
-<div id="app"></div>
-
-<script src="` + extensionBaseURL + `/build/js/main.js"></script>
-
-</body>
-</html>
-`
-  // Explicitly set border width to avoid flashing of the iframe:
-  frame.style.borderWidth = 0
-
-  document.body.appendChild(frame);
+    // Avoid troubles with framesets by working with body only:
+    if (document.body.nodeName !== 'BODY') {
+      return;
+    }
+    document.body.appendChild(frame)
+  }
 
 }(document, chrome))
