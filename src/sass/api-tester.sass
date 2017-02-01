@@ -1,0 +1,45 @@
+// Media fix. (hack)
+$widescreen: 1366px
+@import "~bulma/bulma.sass"
+
+$fa-font-path: "~font-awesome/fonts"
+@import "~font-awesome/scss/font-awesome.scss"
+
+@import "transitions"
+
+// Bulma buttons have strange margins when all button content is one icon.
+.button.is-icon
+  width: 35px
+  .icon,
+  .tag
+    margin: 0
+
+body
+  background-color: #f5f7fa
+  font-family: "Roboto", "Helvetica", "Arial", sans-serif
+  height: 100%
+
+html
+  height: 100%
+
+.input.is-minimal
+  border-top: 0
+  border-left: 0
+  border-right: 0
+  border-radius: 0
+  box-shadow: none
+
+.no-rounded-borders
+  border-radius: 0
+
+// Jsoneditor colors
+@import "~jsoneditor/dist/jsoneditor.css"
+//@import '~jsoneditor'
+
+.no-padding
+  padding: 0 !important
+
+.card-item
+  margin: 4px 0
+  border-right: 2px solid transparent
+  border-bottom: 1px solid rgba(0, 0, 0, .025)

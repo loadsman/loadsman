@@ -1,15 +1,14 @@
 <template>
     <div id="loadsman-app">
-        <h2>Header</h2>
-        <vm-test-component></vm-test-component>
-        Text: {{text}}
-        <hr>
+
+
         <a @click="closeIframe">Закрыть</a>
     </div>
 </template>
 
 <script>
-  import vmTestComponent from './test/test-component.vue'
+
+    import vmApiTester from '../../../old-src/js/api-tester.vue'
 
   import IframeListener from '../IframeListener.js'
 
@@ -37,7 +36,7 @@
       }
     },
     components: {
-      vmTestComponent,
+      vmApiTester,
     },
     methods: {
       closeIframe (){

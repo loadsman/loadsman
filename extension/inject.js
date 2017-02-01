@@ -41,9 +41,11 @@
   function removeIframe(){
     document.body.removeChild(frame)
     frame = null
+    document.body.style.overflow = 'visible'
   }
 
   function appendIframe(){
+    document.body.style.overflow = 'hidden'
     frame = document.createElement('iframe')
     // Configure the frame:
     frame.id = 'loadsman-iframe'
