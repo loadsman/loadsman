@@ -59,7 +59,7 @@ Application main page.
 
 <script>
 //    import vmListsBlock from './components/lists-block/lists-block.vue'
-    import vmActionPanel from './components/action-panel/action-panel.vue'
+    import vmActionPanel from '../../src/js/components/action-panel/action-panel.vue'
 //    import vmRequestPoster from './components/edit-block/edit-block.vue'
 
     export default {
