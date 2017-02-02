@@ -2,7 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
-  entry: './resources/assets-new/main.js',
+  entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './public/build'),
     publicPath: '/',
@@ -62,21 +62,20 @@ module.exports = {
   },
   resolve: {
     alias: {
-      'vue$': 'vue/dist/vue.common.js',
-      'styles': path.resolve(__dirname, 'resources/assets-new/sass/main.sass'),
+      // 'styles': path.resolve(__dirname, 'resources/assets-new/sass/main.sass'),
     },
   },
   devServer: {
-    historyApiFallback: true,
+    contentBase: path.join(__dirname, "extension"),
     noInfo: true,
     proxy: {
-      '*': {
-        target: 'http://utility.pr5.local',
+      '/api-tester': {
+        target: 'http://pr22.local',
         changeOrigin: true,
         secure: false,
         cookieDomainRewrite: '',
         onProxyReq: function (request, req, res) {
-          request.setHeader('origin', 'http://utility.pr5.local')
+          request.setHeader('origin', 'http://pr22.local')
         }
       },
     }

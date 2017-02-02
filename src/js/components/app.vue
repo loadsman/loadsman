@@ -1,6 +1,6 @@
 <template>
     <div id="loadsman-app">
-
+        <vm-api-tester></vm-api-tester>
 
         <a @click="closeIframe">Закрыть</a>
     </div>
@@ -16,18 +16,7 @@
 
   export default {
     mounted(){
-      this.iframeListener.listen('click', () => {
-        this.show = !this.show
-      })
 
-      axios.post('/some/url')
-           .then(() => {
-             console.log('then')
-           }).catch(() => {
-        console.log('catch')
-      })
-
-      console.log(this.location)
     },
     data (){
       return {

@@ -82,8 +82,7 @@ module.exports = function () {
     },
     resolve: {
       alias: {
-        // 'vue$': 'vue/dist/vue.common.js',
-        'styles': path.resolve(__dirname, 'resources/assets-new/sass/main.sass'),
+        // 'styles': path.resolve(__dirname, 'resources/assets-new/sass/main.sass'),
       },
       modules: [
         path.resolve('./node_modules')
