@@ -69,7 +69,7 @@ module.exports = {
     contentBase: path.join(__dirname, "extension"),
     noInfo: true,
     proxy: {
-      '/api-tester': {
+      '/loadsman': {
         target: 'http://pr22.local',
         changeOrigin: true,
         secure: false,
