@@ -1,64 +1,65 @@
 <template>
-    <div>
-        <form class="action-panel"
-              @submit.prevent="sendPrecept"
-        >
-            <div class="control has-addons">
-                <div class="select precept__precept-verb-select">
-                    <vm-precept-verb-select
-                            v-model="precept.method"
-                    ></vm-precept-verb-select>
-                </div>
-
-                <input class="input is-expanded"
-                       type="text"
-                       placeholder="Path"
-                       title="Path"
-                       v-model="precept.path"
-                >
-
-                <button class="button is-success"
-                        :class="{'is-loading': false}"
-                        type="submit"
-                        title="Send"
-                >
-            <span class="icon">
-                <i class="fa fa-send-o"></i>
-            </span>
-                    <span>Send</span>
-                </button>
+    <form class="action-panel"
+          @submit.prevent="sendPrecept"
+    >
+        <div class="control has-addons">
+            <div class="select precept__precept-verb-select">
+                <vm-precept-verb-select
+                        v-model="precept.method"
+                ></vm-precept-verb-select>
             </div>
-        </form>
-    </div>
+
+            <input class="input is-expanded"
+                   type="text"
+                   placeholder="Path"
+                   title="Path"
+                   v-model="precept.path"
+            >
+
+            <button class="button is-success"
+                    :class="{'is-loading': false}"
+                    type="submit"
+                    title="Send"
+            >
+                    <span class="icon">
+                        <i class="fa fa-send-o"></i>
+                    </span>
+                <span>Send</span>
+            </button>
+
+            <!--<button class="button is-primary"-->
+            <!--:class="{'is-loading': $activeActions['requests/store'] || $activeActions['requests/update']}"-->
+            <!--type="button"-->
+            <!--@click="save"-->
+            <!--title="Save"-->
+            <!--&gt;-->
+            <!--<i class="fa fa-save"></i>-->
+            <!--</button>-->
+
+            <!--<button class="button is-icon is-primary"-->
+            <!--:class="{'is-disabled': ! request.id}"-->
+            <!--type="button"-->
+            <!--@click="copy"-->
+            <!--title="Copy"-->
+            <!--&gt;-->
+            <!--<i class="fa fa-files-o"></i>-->
+            <!--</button>-->
+        </div>
+    </form>
 </template>
 
-<button class="button is-primary"
-        :class="{'is-loading': $activeActions['requests/store'] || $activeActions['requests/update']}"
-        type="button"
-        @click="save"
-        title="Save"
->
-    <i class="fa fa-save"></i>
-</button>
-
-<button class="button is-icon is-primary"
-        :class="{'is-disabled': ! request.id}"
-        type="button"
-        @click="copy"
-        title="Copy"
->
-    <i class="fa fa-files-o"></i>
-</button>
 
 <script>
-  import preceptDecorator from '../../instances/preceptDecorator.js'
+  import Precept from '../../classes/Entities/Precept.js'
+  import PreceptRepository from '../../classes/Modules/Precept/PreceptRepository.js'
 
   import vmPreceptVerbSelect from './precept-verb-select.vue'
 
   export default {
     data: () => {
       return {
-        preceptDecorator,
+        precept: new Precept(),
+        preceptRepository: new PreceptRepository,
       }
     },
     components: {
@@ -66,7 +67,7 @@
     },
     methods: {
       sendPrecept(): void {
-
+        this.preceptRepository.send(this.precept)
       },
       save (){
         // Saves or updates depending on whether request has id
@@ -79,11 +80,7 @@
         this.$store.dispatch('saveRequest', this.request)
       }
     },
-    computed: {
-      precept (): string {
-        return this.preceptDecorator.precept
-      }
-    },
+    computed: {},
   }
 </script>
 
@@ -92,6 +89,12 @@
     $color: #c6faff
 
     .action-panel
+        min-height: 3.5rem
+        display: flex
+        padding: 0 10px
+        align-items: center
+        & > *
+            flex: 1
         margin: 0
         width: 100%
         .button, .button:hover, .button:active

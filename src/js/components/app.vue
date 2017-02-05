@@ -1,55 +1,52 @@
 <template>
     <div id="loadsman-app">
-        <div class="top-fixed has-shadow">
-            <div class="columns">
-                <nav class="nav" style="width: 400px">
-                    <div class="nav-left">
-                        <a class="nav-item logo" href=".">
-                            <span class="nav-icon">API-TESTER</span>
-                        </a>
-                    </div>
-                    <div class="nav-right">
-                        <a class="nav-item"
-                           title="Github"
-                           href="https://github.com/asvae/laravel-api-tester"
-                           target="_blank"
-                        >
-                            <i class="fa fa-github nav-icon"></i>
-                        </a>
-                        <a class="nav-item"
-                           title="Wiki"
-                           href="https://github.com/asvae/laravel-api-tester/wiki"
-                           target="_blank"
-                        >
-                            <i class="fa fa-book nav-icon"></i>
-                        </a>
-                        <a class="nav-item"
-                           title="Fork me"
-                           href="https://github.com/asvae/laravel-api-tester/fork"
-                           target="_blank"
-                        >
-                            <i class="fa fa-code-fork nav-icon"></i>
-                        </a>
-                        <a class="nav-item"
-                           title="Issues"
-                           href="https://github.com/asvae/laravel-api-tester/issues"
-                           target="_blank"
-                        >
-                            <i class="fa fa-bug nav-icon"></i>
-                        </a>
-                    </div>
-                </nav>
-                <div class="column">
-                    <vm-action-panel></vm-action-panel>
+        <div class="top-fixed has-shadow is-flex-tablet">
+            <nav class="nav promotion-header">
+                <div class="nav-left">
+                    <a class="nav-item promotion-header__pretty-link logo" href=".">
+                        <span class="nav-icon">LOADSMAN</span>
+                    </a>
                 </div>
-            </div>
+
+                <div class="nav-right is-flex is-pulled-right ">
+                    <a class="nav-item promotion-header__pretty-link"
+                       title="Github"
+                       href="https://github.com/asvae/laravel-api-tester"
+                       target="_blank"
+                    >
+                        <i class="fa fa-github nav-icon"></i>
+                    </a>
+                    <a class="nav-item promotion-header__pretty-link"
+                       title="Wiki"
+                       href="https://github.com/asvae/laravel-api-tester/wiki"
+                       target="_blank"
+                    >
+                        <i class="fa fa-book nav-icon"></i>
+                    </a>
+                    <a class="nav-item promotion-header__pretty-link"
+                       title="Fork me"
+                       href="https://github.com/asvae/laravel-api-tester/fork"
+                       target="_blank"
+                    >
+                        <i class="fa fa-code-fork nav-icon"></i>
+                    </a>
+                    <a class="nav-item promotion-header__pretty-link"
+                       title="Issues"
+                       href="https://github.com/asvae/laravel-api-tester/issues"
+                       target="_blank"
+                    >
+                        <i class="fa fa-bug nav-icon"></i>
+                    </a>
+                </div>
+            </nav>
+            <vm-action-panel class="is-fullwidth"></vm-action-panel>
         </div>
         <div class="bottom">
             <div class="left-side is-full is-multiline">
-                <vm-lists-block></vm-lists-block>
+                <!--<vm-lists-block></vm-lists-block>-->
             </div>
             <div class="right-side">
-                <vm-request-poster></vm-request-poster>
+                <!--<vm-request-poster></vm-request-poster>-->
             </div>
         </div>
     </div>
@@ -92,22 +89,19 @@
 </script>
 
 <style lang="sass" rel="stylesheet/sass">
-    #loadsman-app
-        .nav
-            background-color: transparent
-
-        .nav-item > .nav-icon
-            transition: all ease .1s
-            color: #006679
-            text-shadow: 1px 1px 1px #3debff, -1px -1px 1px #0092a2
-
-        .nav-item:hover > .nav-icon
+    .promotion-header .promotion-header__pretty-link
+        transition: all ease .2s
+        color: #006679
+        text-shadow: 1px 1px 1px #3debff, -1px -1px 1px #0092a2
+        &:hover
             color: #c6faff
             text-shadow: -1px -1px 1px #3debff, 1px 1px 1px #0092a2
 
+    #loadsman-app
+        .nav
+            background-color: transparent
         .top-fixed
             width: 100%
-            padding: 10px
             top: 0
             left: 0
             position: fixed
