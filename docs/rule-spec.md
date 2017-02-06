@@ -1,0 +1,2 @@
+## Rule
+### Errors<Error>

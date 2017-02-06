@@ -19,7 +19,6 @@
     ],
     "web_accessible_resources": [
         "main.html",
-        "build/js/main.js",
-        "build/css/main.css"
+        "build/*"
     ]
 }

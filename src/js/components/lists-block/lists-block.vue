@@ -1,10 +1,10 @@
 <template>
     <div class="lists-block">
         <vm-navigation-tabs
-                :pages="['routes', 'requests', 'history']"
+                :pages="['rules', 'requests', 'history']"
                 v-model="mode"
         ></vm-navigation-tabs>
-        <vm-rule-selector v-show="mode === 'rule'"
+        <vm-rule-selector v-show="mode === 'rules'"
         ></vm-rule-selector>
         <!--<vm-requests-selector v-show="mode === 'requests'"-->
         <!--&gt;</vm-requests-selector>-->
@@ -28,7 +28,7 @@
     },
     data (){
       return {
-        mode: "rule",
+        mode: "rules",
       }
     },
   }

@@ -10,19 +10,17 @@
             </a>
         </header>
         <div class="notification"
-             v-if="filteredRoutes.length === 0 && ! ruleRepository.isLoading"
+             v-if="filteredRules.length === 0 && ! ruleRepository.isLoading"
              transition="fade-in"
         >
             No routes matched.
         </div>
-        <vm-rule v-for="route in filteredRoutes"
-                 class="is-fullwidth"
-                 transition="slip"
-                 :route="route"
+        <vm-rule v-for="rule in filteredRules"
+                 @click="selectRule(rule)"
+                 :route="rule"
         ></vm-rule>
         <div class="notification is-danger"
              v-if="false"
-             transition="fade-in"
         >
             Can't load routes. Check console for details.
         </div>
@@ -31,6 +29,7 @@
 
 <script>
   import _ from 'lodash'
+  import Rule from '../../classes/Entities/Rule.js'
   import RuleRepository from '../../classes/Modules/Rule/RuleRepository.js'
 
   import vmRule from './rule.vue'
@@ -50,12 +49,15 @@
       this.refresh()
     },
     methods: {
+      selectRule(rule: Rule){
+        console.log(rule)
+      },
       refresh (){
         this.ruleRepository.loadAll()
       }
     },
     computed: {
-      filteredRoutes (){
+      filteredRules (){
 //        let {search, routes} = this.$store.getters
 //        search = search.toUpperCase()
 //        let toDisplay = []

@@ -5,11 +5,11 @@ import axios from 'axios'
 let instance = axios.create({
   baseURL: '/loadsman/',
   responseType: 'json',
-  transformResponse: [
-    (data) => {
-      return data.data
-    }
-  ]
+  withCredentials: true,
+})
+instance.interceptors.response.use((response) => {
+  response.data = response.data.data
+  return response
 })
 
 class RuleRepository {
@@ -22,6 +22,8 @@ class RuleRepository {
   }
 
   loadAll() {
+    console.log(document.cookie)
+
     if (this.isLoading){
       return
     }
