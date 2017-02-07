@@ -22,9 +22,7 @@ class RuleRepository {
   }
 
   loadAll() {
-    console.log(document.cookie)
-
-    if (this.isLoading){
+    if (this.isLoading) {
       return
     }
     this.isLoading = true
@@ -33,9 +31,9 @@ class RuleRepository {
               let rules = _.map(data, (rule) => {
                 return _.assign(new Rule, rule)
               })
-              console.group('Got rules from server: ')
-              console.log(rules)
-              console.groupEnd()
+              // console.group('Got rules from server: ')
+              // console.log(rules)
+              // console.groupEnd()
               this.rules = rules
               this.loaded = true
               this.isLoading = false

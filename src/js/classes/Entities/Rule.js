@@ -1,9 +1,10 @@
 class Rule {
   constructor() {
     this.methods = []
-    this.name = null
+    this.name = ''
     this.path = '/'
     this.router = null
+    this.wheres = {}
   }
 }
 

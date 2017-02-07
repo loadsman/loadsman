@@ -1,6 +1,6 @@
 <template>
     <div class="request-editor">
-        <div class="columns is-multiline is-desktop" v-if="request">
+        <div class="columns is-multiline is-desktop">
             <div class="column is-full-desktop is-7-widescreen">
                 <div class="card is-fullwidth">
                     <header class="card-header">
@@ -9,32 +9,30 @@
                                    type="text"
                                    placeholder="Name"
                                    title="Title"
-                                   v-model="request.name"
+                                   v-model="editedPrecept.name"
                             >
                         </p>
                     </header>
 
-                    <section class="card-content">
+                    <div style="padding: 10px">
                         <vm-navigation-tabs
                                 class="is-boxed"
                                 :pages="['data', 'headers']"
-                                :mode="mode"
-                                @changed="$store.dispatch('setRequestEditorMode', $arguments[0])"
+                                v-model="mode"
                         ></vm-navigation-tabs>
-                    </section>
+                    </div>
 
                     <!-- Editor -->
                     <div v-if="mode === 'data'">
-                        <vm-json-editor :json="request.body"
+                        <vm-json-editor :json="editedPrecept.body"
                                         style="height: 300px"
-                                        @changed="request.body = $arguments[0], changed = true"
+                                        @changed="editedPrecept.body = $event, changed = true"
                         ></vm-json-editor>
                     </div>
 
                     <!-- Headers -->
                     <div v-if="mode === 'headers'">
-                        <vm-headers :headers="request.headers"
-                                    @updated="request.headers = $arguments[0]"
+                        <vm-headers v-model="editedPrecept.headers"
                         ></vm-headers>
                     </div>
                 </div>
@@ -47,28 +45,46 @@
 </template>
 
 <script>
-    import vmJsonEditor from '../../json-editor/json-editor.vue'
-    import vmRouteInfo from './route-info/route-info.vue'
-    import vmHeaders from '../../../../../src/js/components/precept-editor/precept-edit/headers/headers.vue'
+  import _ from 'lodash'
 
-    import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
+  import Precept from '../../../classes/Entities/Precept.js'
+  import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
+  //    import vmRouteInfo from './route-info/route-info.vue'
+  import vmHeaders from './headers/headers.vue'
 
-    import requestEditorData from './request-editor-data.js'
+  import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
 
-    export default {
-        data: () => requestEditorData,
-        components: {
-            vmJsonEditor,
-            vmHeaders,
-            vmRouteInfo,
-            vmNavigationTabs,
-        },
-        computed: {
-            mode (){
-                return this.$store.getters.requestEditorMode
-            },
-        },
-    }
+  export default {
+    data () {
+      return {
+        editedPrecept: _.cloneDeep(this.value),
+        mode: 'data', // 'headers'
+      }
+    },
+    components: {
+      vmJsonEditor,
+      vmHeaders,
+//            vmRouteInfo,
+      vmNavigationTabs,
+    },
+    created(){
+      this.refreshFromParent()
+    },
+    watch: {
+      value: 'refreshFromParent',
+    },
+    props: {
+      value: {
+        type: Precept,
+        required: true,
+      }
+    },
+    methods: {
+      refreshFromParent(){
+        this.editedPrecept = _.cloneDeep(this.value)
+      }
+    },
+  }
 </script>
 
 <style scoped>

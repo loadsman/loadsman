@@ -9,7 +9,7 @@
                 <vm-lists-block></vm-lists-block>
             </div>
             <div class="right-side">
-                <!--<vm-request-poster></vm-request-poster>-->
+                <vm-precept-editor></vm-precept-editor>
             </div>
         </div>
     </div>
@@ -24,7 +24,7 @@
   import vmListsBlock from './lists-block/lists-block.vue'
   import vmPromotionHeader from './promotion-header/promotion-header.vue'
   import vmActionPanel from './action-panel/action-panel.vue'
-  //    import vmRequestPoster from './components/edit-block/edit-block.vue'
+  import vmPreceptEditor from './precept-editor/precept-editor.vue'
 
   export default {
     mounted(){
@@ -38,11 +38,10 @@
     },
     components: {
       vmListsBlock,
+      vmPreceptEditor,
 
       vmActionPanel,
       vmPromotionHeader,
-//            vmListsBlock,
-//            vmRequestPoster,
     },
     methods: {
       closeIframe (){

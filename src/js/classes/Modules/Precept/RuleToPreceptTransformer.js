@@ -9,19 +9,11 @@ class RuleToPreceptTransformer {
   transform(rule: Rule): Precept {
     let precept = new Precept()
 
-    return {
-      method: this.route.methods[0],
-      path: this.route.path,
-      name: "",
-      body: this.route.hasOwnProperty('body') ? this.route.body : '""',
-      wheres: this.route.hasOwnProperty('wheres') ? this.route.wheres : {},
-      headers: this.route.hasOwnProperty('headers') ? this.route.headers : [],
-      config: {
-        addCRSF: true,
-      }
-    }
+    precept.method = rule.methods[0]
+    precept.path = rule.path
+    precept.name = rule.name
 
-    return new Precept
+    return precept
   }
 }
 

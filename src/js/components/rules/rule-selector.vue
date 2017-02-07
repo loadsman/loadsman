@@ -31,6 +31,9 @@
   import _ from 'lodash'
   import Rule from '../../classes/Entities/Rule.js'
   import RuleRepository from '../../classes/Modules/Rule/RuleRepository.js'
+  import RuleToPreceptTransformer from '../../classes/Modules/Precept/RuleToPreceptTransformer.js'
+
+  import preceptWorker from '../../instances/preceptWorker.js'
 
   import vmRule from './rule.vue'
   //    import vmSearchPanel from  '../search/search-panel.vue'
@@ -50,7 +53,8 @@
     },
     methods: {
       selectRule(rule: Rule){
-        console.log(rule)
+        let precept = new RuleToPreceptTransformer().transform(rule)
+        preceptWorker.setPrecept(precept)
       },
       refresh (){
         this.ruleRepository.loadAll()
