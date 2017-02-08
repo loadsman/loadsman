@@ -3,7 +3,7 @@
 </template>
 
 <script>
-    import JSONEditor from 'jsoneditor'
+//    import JSONEditor from 'jsoneditor'
 
     export default {
         editor: null, // Json editor instance is bound to component.
@@ -11,9 +11,9 @@
             json: {}
         },
         methods: {
-            initEditor(el, options, json){
-                this.$options.editor = new JSONEditor(el, options, json)
-            }
+//            initEditor(el, options, json){
+//                this.$options.editor = new JSONEditor(el, options, json)
+//            }
         }
     }
 </script>

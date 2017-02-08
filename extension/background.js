@@ -6,6 +6,7 @@ chrome.browserAction.onClicked.addListener(function (tab) {
     from: 'loadsmanExtension',
     command: 'closeIframe',
   }, function (response) {
+    //
   })
 })
 

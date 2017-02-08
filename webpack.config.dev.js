@@ -68,8 +68,9 @@ module.exports = {
   devServer: {
     contentBase: path.join(__dirname, "extension"),
     noInfo: true,
-    proxy: {
-      '/loadsman': {
+    proxy: [
+      {
+        context: ['/loadsman/**', '/api/**'],
         target: 'http://pr22.local',
         changeOrigin: true,
         secure: false,
@@ -77,8 +78,8 @@ module.exports = {
         onProxyReq: function (request, req, res) {
           request.setHeader('origin', 'http://pr22.local')
         }
-      },
-    }
+      }
+    ]
   },
   performance: {
     hints: false

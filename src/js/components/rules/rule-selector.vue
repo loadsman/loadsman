@@ -4,13 +4,13 @@
             <!--<vm-search-panel class="card-header-title"></vm-search-panel>-->
             <a class="button is-large is-white is-fullheight"
                @click="refresh"
-               :class="{'is-loading' : ruleRepository.isLoading}"
+               :class="{'is-loading' : ruleObserver.loading}"
             >
                 <i class="fa fa-refresh"></i>
             </a>
         </header>
         <div class="notification"
-             v-if="filteredRules.length === 0 && ! ruleRepository.isLoading"
+             v-if="filteredRules.length === 0 && ! ruleObserver.loading"
              transition="fade-in"
         >
             No routes matched.
@@ -32,6 +32,7 @@
   import Rule from '../../classes/Entities/Rule.js'
   import RuleRepository from '../../classes/Modules/Rule/RuleRepository.js'
   import RuleToPreceptTransformer from '../../classes/Modules/Precept/RuleToPreceptTransformer.js'
+  import ruleCollection from '../../instances/ruleCollection.js'
 
   import preceptWorker from '../../instances/preceptWorker.js'
 
@@ -41,7 +42,8 @@
   export default {
     data () {
       return {
-        ruleRepository: new RuleRepository()
+        ruleCollection,
+        ruleObserver: new RuleRepository().getRuleObserver()
       }
     },
     components: {
@@ -57,7 +59,13 @@
         preceptWorker.setPrecept(precept)
       },
       refresh (){
-        this.ruleRepository.loadAll()
+        let observer = new RuleRepository().getRuleObserver()
+
+        observer.send({url: 'get-many'}).then((response) => {
+          response.json().then(({data}) => {
+            ruleCollection.setItems(data)
+          })
+        })
       }
     },
     computed: {
@@ -80,7 +88,7 @@
 //          }
 //        })
 
-        return this.ruleRepository.rules
+        return this.ruleCollection.items
       }
     }
   }
