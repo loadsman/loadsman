@@ -4,8 +4,8 @@
  * @property url {String} server URL that will be used for the request
  * @property method {String} request method
  * @property baseURL {String} `baseURL` will be prepended to `url` unless `url` is absolute
- * @property transformRequest {Array}
- * @property transformResponse {Array}
+ * @property interceptRequest {Array}
+ * @property interceptResponse {Array}
  * @property headers {Object}
  * @property data {any}
  * @property credentials {Boolean}
@@ -15,8 +15,8 @@ class AjaxOptions {
     this.url = ''
     this.method = 'get'
     this.baseURL = ''
-    this.transformRequest = []
-    this.transformResponse = []
+    this.interceptRequest = []
+    this.interceptResponse = []
     this.headers = {}
     this.data = {}
     this.credentials = false

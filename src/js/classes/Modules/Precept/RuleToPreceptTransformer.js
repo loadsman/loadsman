@@ -1,7 +1,7 @@
 import Rule from '../../Entities/Rule.js'
 import Precept from '../../Entities/Precept.js'
 
-class RuleToPreceptTransformer {
+export default class {
   constructor() {
 
   }
@@ -16,5 +16,3 @@ class RuleToPreceptTransformer {
     return precept
   }
 }
-
-export default RuleToPreceptTransformer

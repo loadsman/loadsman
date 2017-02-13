@@ -15,7 +15,7 @@
 
 <script>
   import vmNavigationTabs from '../ligth-components/navigation-tabs.vue'
-      import vmRuleSelector from '../rules/rule-selector.vue'
+      import vmRuleSelector from '../rule/rule-selector/rule-selector.vue'
   //    import vmRequestsSelector from '../requests/requests-selector.vue'
   //    import vmHistorySelector from '../history/history-selector.vue'
 

@@ -11,7 +11,15 @@ class FetchAdapter extends AbstractAdapter{
       credentials: options.credentials,
     }
 
-    return fetch(input, init)
+    let promise = fetch(input, init)
+
+    return this._applyReponseInterceptors(promise, options)
+  }
+
+  _applyReponseInterceptors(promise: Promise, options: AjaxOptions){
+    return options.interceptResponse.reduce((acc, value) => {
+      return value(acc)
+    }, promise)
   }
 }
 

@@ -1,10 +1,6 @@
-// Media fix. (hack)
-$widescreen: 1366px
-@import "~bulma/bulma.sass"
-
-$fa-font-path: "~font-awesome/fonts"
-@import "~font-awesome/scss/font-awesome.scss"
-
+@import "bulma"
+@import "font-awesome"
+@import 'jsoneditor'
 @import "transitions"
 
 // Bulma buttons have strange margins when all button content is one icon.
@@ -32,9 +28,6 @@ html
 .no-rounded-borders
   border-radius: 0
 
-// Jsoneditor colors
-@import "~jsoneditor/dist/jsoneditor.css"
-//@import '~jsoneditor'
 
 .no-padding
   padding: 0 !important

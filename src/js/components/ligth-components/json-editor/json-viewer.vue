@@ -3,23 +3,32 @@
 </template>
 
 <script>
-    import abstractJsonEditor from './abstract-json-editor.vue'
+  import jsoneditor from 'jsoneditor'
 
-    export default {
-        extends: abstractJsonEditor,
-        watch: {
-            json (json){
-                this.$options.editor.set(json)
-            }
-        },
-        ready() {
-            let options = {
-                mode: 'view',
-            }
+  export default {
+    editor: null, // Json editor instance is bound to component.
+    props: {
+      json: {}
+    },
 
-            this.initEditor(this.$el, options, this.json)
-        },
-    }
+    watch: {
+      json (json){
+        this.$options.editor.set(json)
+      }
+    },
+    mounted() {
+      let options = {
+        mode: 'view',
+      }
+
+      this.initEditor(this.$el, options, this.json)
+    },
+    methods: {
+      initEditor(el, options, json){
+        this.$options.editor = new jsoneditor(el, options, json)
+      }
+    },
+  }
 </script>
 
 <style scoped>

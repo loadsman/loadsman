@@ -1,30 +1,26 @@
 <template>
-    <div id="loadsman-app">
-        <div class="top-fixed has-shadow is-flex-tablet">
-            <vm-promotion-header></vm-promotion-header>
-            <vm-action-panel class="is-fullwidth"></vm-action-panel>
-        </div>
-        <div class="bottom">
-            <div class="left-side is-full is-multiline">
-                <vm-lists-block></vm-lists-block>
-            </div>
-            <div class="right-side">
-                <vm-precept-editor></vm-precept-editor>
-            </div>
+    <div class="loadsman-app">
+        <vm-navigation class="loadsman-app__navigation"></vm-navigation>
+
+        <div class="loadsman-app__main">
+            <vm-rule-explorer v-if="localRouter.path === 'rules'"
+            ></vm-rule-explorer>
+            <vm-precept-explorer v-if="localRouter.path === 'precepts'"
+            ></vm-precept-explorer>
         </div>
     </div>
 </template>
 
 <script>
 
-  import axios from 'axios'
+  import localRouter from '../instances/localRouter.js'
 
   import IframeListener from '../IframeListener.js'
 
-  import vmListsBlock from './lists-block/lists-block.vue'
-  import vmPromotionHeader from './promotion-header/promotion-header.vue'
-  import vmActionPanel from './action-panel/action-panel.vue'
-  import vmPreceptEditor from './precept-editor/precept-editor.vue'
+  import vmNavigation from './navigation/navigation.vue'
+
+  import vmRuleExplorer from './rule/rule-explorer.vue'
+  import vmPreceptExplorer from './precept/precept-explorer.vue'
 
   export default {
     mounted(){
@@ -32,16 +28,16 @@
     },
     data (){
       return {
+        localRouter,
         iframeListener: new IframeListener,
         text: 'Some text',
       }
     },
     components: {
-      vmListsBlock,
-      vmPreceptEditor,
+      vmNavigation,
 
-      vmActionPanel,
-      vmPromotionHeader,
+      vmRuleExplorer,
+      vmPreceptExplorer,
     },
     methods: {
       closeIframe (){
@@ -54,35 +50,22 @@
   }
 </script>
 
-<style lang="sass" rel="stylesheet/sass">
-    #loadsman-app
-        .nav
-            background-color: transparent
-        .top-fixed
-            width: 100%
-            top: 0
-            left: 0
-            position: fixed
-            background-color: #1fc8db
-            z-index: 5
-            box-shadow: 0 2px 5px rgba(0, 0, 0, .15)
+<style lang="scss" rel="stylesheet/scss">
+    @import "~local-styles";
 
-        .left-side
-            margin-top: 52px
-            left: 0
-            position: absolute
-            width: 400px
-            min-height: calc(100% - 52px)
-            padding: 10px
+    .loadsman-app {
+        .loadsman-app__navigation {
+            position: fixed;
+            height: 100%;
+            background-color: $primary;
+            width: 40px;
+            box-shadow: 0 2px 5px rgba(0, 0, 0, .15);
+            z-index: 5;
+        }
+        .loadsman-app__main {
+            margin-left: 40px;
+        }
+    }
 
-        .right-side
-            margin-top: 52px
-            left: calc(400px)
-            position: absolute
-            padding: 10px
-            width: calc(100% - 400px)
-
-        .logo
-            padding-left: 20px
 
 </style>

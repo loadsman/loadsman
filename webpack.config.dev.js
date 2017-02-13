@@ -62,7 +62,7 @@ module.exports = {
   },
   resolve: {
     alias: {
-      // 'styles': path.resolve(__dirname, 'resources/assets-new/sass/main.sass'),
+      'local-styles': path.resolve(__dirname, 'src/sass/loadsman.sass'),
     },
   },
   devServer: {

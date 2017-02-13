@@ -11,7 +11,7 @@
             <span>LOADSMAN</span>
         </a>
 
-        <div class="is-flex is-pulled-right ">
+        <div class="is-flex is-hidden-mobile">
             <a class="nav-item promotion-header__pretty-link"
                title="Wiki"
                href="https://github.com/asvae/laravel-api-tester/wiki"
@@ -41,13 +41,19 @@
   export default {}
 </script>
 
-<style lang="sass" rel="stylesheet/sass">
-    .promotion-header .promotion-header__pretty-link
-        transition: all ease .2s
-        color: #006679
-        text-shadow: 1px 1px 1px #3debff, -1px -1px 1px #0092a2
-        &:hover
-            color: #c6faff
-            text-shadow: -1px -1px 1px #3debff, 1px 1px 1px #0092a2
+<style lang="scss" rel="stylesheet/scss">
+    .promotion-header {
+        background-color: transparent;
+    }
+    .promotion-header .promotion-header__pretty-link {
+        padding: 0 10px;
+        transition: all ease .2s;
+        color: #006679;
+        text-shadow: 1px 1px 1px #3debff, -1px -1px 1px #0092a2;
+        &:hover {
+            color: #c6faff;
+            text-shadow: -1px -1px 1px #3debff, 1px 1px 1px #0092a2;
+        }
+    }
 </style>
 

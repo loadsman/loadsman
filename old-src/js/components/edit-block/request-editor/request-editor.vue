@@ -49,7 +49,7 @@
 <script>
     import vmJsonEditor from '../../json-editor/json-editor.vue'
     import vmRouteInfo from './route-info/route-info.vue'
-    import vmHeaders from '../../../../../src/js/components/precept-editor/precept-edit/headers/headers.vue'
+    import vmHeaders from '../../../../../src/js/components/precept/precept-editor/headers/headers.vue'
 
     import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
 

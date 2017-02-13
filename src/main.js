@@ -1,2 +1,2 @@
+import './sass/loadsman.sass'
 import './js/components/app.js'
-import './sass/api-tester.sass'

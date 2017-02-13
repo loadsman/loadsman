@@ -1,13 +1,16 @@
+@import "variables/variables"
+@import "~jsoneditor/dist/jsoneditor.css"
+
 div.jsoneditor
   border: none
   .ace_editor
     &.ace_focus
-      border-color: $primary
+      border-color: $main-background
     .ace_marker-layer
       .ace_active-line
-        background-color: lighten($primary, 40%)
+        background-color: lighten($main-background, 40%)
   .jsoneditor-menu
-    background-color: $primary
+    background-color: $main-background
     border-bottom-color: transparent
     .jsoneditor-frame
       padding: 0
@@ -26,5 +29,5 @@ div.jsoneditor
       background-color: $primary
       margin: 0
       &:hover,&:active,&:focus
-        background-color: darken($primary, 10%)
+        background-color: darken($main-background, 10%)
         outline: 0

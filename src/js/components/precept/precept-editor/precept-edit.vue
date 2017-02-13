@@ -3,6 +3,7 @@
         <div class="columns is-multiline is-desktop">
             <div class="column is-full-desktop is-7-widescreen">
                 <div class="card is-fullwidth">
+
                     <header class="card-header">
                         <p class="card-header-title">
                             <input class="input is-expanded is-fullwidth"
@@ -47,6 +48,8 @@
 <script>
   import _ from 'lodash'
 
+  import preceptStorage from '../../../instances/preceptStorage.js'
+
   import Precept from '../../../classes/Entities/Precept.js'
   import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
   //    import vmRouteInfo from './route-info/route-info.vue'
@@ -57,14 +60,13 @@
   export default {
     data () {
       return {
-        editedPrecept: _.cloneDeep(this.value),
+        editedPrecept: new Precept(),
         mode: 'data', // 'headers'
       }
     },
     components: {
       vmJsonEditor,
       vmHeaders,
-//            vmRouteInfo,
       vmNavigationTabs,
     },
     created(){
@@ -76,12 +78,21 @@
     props: {
       value: {
         type: Precept,
-        required: true,
       }
     },
     methods: {
+      loadAllPrecepts(){
+        let result = preceptStorage.getAllPrecepts()
+        console.log(result.exec((err, doc) => {
+          console.log(doc)
+        }))
+      },
+      savePrecept(){
+        preceptStorage.create(this.editedPrecept)
+        console.log(this.editedPrecept)
+      },
       refreshFromParent(){
-        this.editedPrecept = _.cloneDeep(this.value)
+        this.editedPrecept = Object.assign(new Precept(), this.value)
       }
     },
   }

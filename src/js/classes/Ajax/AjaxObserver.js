@@ -38,20 +38,9 @@ class AjaxObserver {
     }
   }
 
-  extend(options): AjaxObserver {
-    let newOptions = Object.assign(new AjaxOptions(), this._options, options)
-
-    return new AjaxObserver(this._send, newOptions)
-  }
-
   send(options: Object | String) {
-    console.log(this._options)
-    console.log(options)
-
-    let optionsTmp = options instanceof String ? {url: options} : options
+    let optionsTmp = typeof options === 'string' ? {url: options} : options
     optionsTmp = Object.assign(new AjaxOptions(), this._options, optionsTmp)
-
-    console.log(optionsTmp)
 
     this._startLoading()
     let promise = this._send(optionsTmp)

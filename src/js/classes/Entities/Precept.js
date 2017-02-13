@@ -2,19 +2,25 @@ import HeaderCollection from '../Modules/Header/HeaderCollection.js'
 
 /**
  * @class Precept
+ * @property _id {String}
  * @property body {String} json request
  * @property path {String}
  * @property name {Number}
  * @property method {String}
  * @property headers {String}
+ * @property createdAt {integer}
+ * @property updatedAt {integer}
  */
 class Precept {
   constructor() {
-    this.body = '""'
+    this._id = undefined
+    this.body = '{}'
     this.path = '/'
     this.name = ''
     this.method = 'GET'
     this.setHeaders(new HeaderCollection([]))
+    this.createdAt = Date.now()
+    this.updatedAt = Date.now()
   }
 
   setMethod(method: string): void {

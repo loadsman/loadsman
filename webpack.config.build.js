@@ -76,13 +76,13 @@ module.exports = function () {
         },
         {
           test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
-          loader: 'url-loader?limit=100000'
+          loader: 'file-loader?name=fonts/[name].[ext]'
         }
       ]
     },
     resolve: {
       alias: {
-        // 'styles': path.resolve(__dirname, 'resources/assets-new/sass/main.sass'),
+        'local-styles': path.resolve(__dirname, 'src/sass/loadsman.sass'),
       },
       modules: [
         path.resolve('./node_modules')
