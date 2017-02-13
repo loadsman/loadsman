@@ -6,6 +6,7 @@
             </header>
             <vm-precept-selector></vm-precept-selector>
             <vm-precept-edit
+                    v-model="preceptWorker.precept"
                     @updated="updated"
             ></vm-precept-edit>
         </div>
@@ -16,7 +17,14 @@
   import vmPreceptSelector from './precept-selector/precept-selector.vue'
   import vmPreceptEdit from './precept-editor/precept-edit.vue'
 
+  import preceptWorker from '../../instances/preceptWorker.js'
+
   export default {
+    data () {
+        return {
+          preceptWorker
+        }
+    },
     components: {
       vmPreceptSelector,
       vmPreceptEdit,

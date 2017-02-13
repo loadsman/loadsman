@@ -15,6 +15,8 @@
                         </p>
                     </header>
 
+                    <pre>{{value}}</pre>
+
                     <div style="padding: 10px">
                         <vm-navigation-tabs
                                 class="is-boxed"

@@ -7,7 +7,6 @@ class PreceptWorker {
 
   setPrecept(precept: Precept){
     this.precept = precept
-    console.log(precept)
   }
 }
 
