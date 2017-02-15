@@ -1,4 +1,4 @@
-export default class LocalRouter {
+export default class {
   constructor(path: string = ''){
     this.path = path
   }

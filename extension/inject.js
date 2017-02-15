@@ -1,51 +1,61 @@
 (function (document, chrome) {
   var frame
 
-    // NOTE Conceptually, it's better to check for exception id for security reasons.
+  // NOTE Conceptually, it's better to check for exception id for security reasons.
   // But it's kinda complicated so I just pass name to avoid conflicts.
 
   // we proxy message from loadsman extension to loadsman iframe and backwards.
   // loadsman-extension -> loadsman-iframe
-    chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
-      if (data.from !== 'loadsmanExtension'){
-        return
-      }
-
-      if (data.command === 'closeIframe'){
-        toggleIframe(function (){
-          if (frame){
-            frame.contentWindow.postMessage(data, '*')
-          }
-        })
-      }
-    })
-
-  // loadsma-iframe -> loadsman-extension
-  window.addEventListener('message', (event) => {
-    var data = event.data
-    if (data.from !== 'loadsmanIframe'){
+  chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
+    if (data.from !== 'loadsmanExtension') {
       return
     }
 
-    if (data.command === 'closeIframe'){
+    if (data.command === 'closeIframe') {
       toggleIframe()
     }
 
-    chrome.runtime.sendMessage(data);
+    transitMessageToIframe(data)
   })
 
-  function toggleIframe(next){
-    frame ? removeIframe(next) : appendIframe(next)
+  // loadsman-iframe -> loadsman-extension
+  window.addEventListener('message', (event) => {
+    var data = event.data
+
+    if (data.from !== 'loadsmanIframe') {
+      return
+    }
+
+    if (data.command === 'closeIframe') {
+      toggleIframe()
+      return
+    }
+
+    transitMessageToExtension(data)
+  })
+
+  function transitMessageToIframe(message) {
+    // Only when iframe is loaded will we try to pass down messages.
+    if (frame && frame.contentWindow) {
+      frame.contentWindow.postMessage(message, '*')
+    }
   }
 
-  function removeIframe(next){
+  function transitMessageToExtension(message) {
+    chrome.runtime.sendMessage(message)
+  }
+
+  function toggleIframe() {
+    frame ? removeIframe() : appendIframe()
+  }
+
+  function removeIframe() {
     document.body.removeChild(frame)
     frame = null
     document.body.style.overflow = 'visible'
-    next()
   }
 
-  function appendIframe(next){
+  function appendIframe() {
     document.body.style.overflow = 'hidden'
     frame = document.createElement('iframe')
     // Configure the frame:
@@ -56,8 +66,8 @@
     // origin will not be the same as it was for original page
     let source = chrome.runtime.getURL('main.html')
     fetch(source)
-        .then(function (response){
-          response.text().then(function (text){
+        .then(function (response) {
+          response.text().then(function (text) {
             frame.srcdoc = text.replace(/build/gi, 'chrome-extension://' + chrome.runtime.id + '/build')
 
             // Avoid troubles with framesets by working with body only:
@@ -65,7 +75,6 @@
               return;
             }
             document.body.appendChild(frame)
-            next()
           })
         })
   }

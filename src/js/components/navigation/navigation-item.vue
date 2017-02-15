@@ -66,6 +66,8 @@
             justify-content: center;
             align-items: center;
             white-space: nowrap;
+            border-bottom-right-radius: 2px;
+            border-top-right-radius: 2px;
             box-shadow: 0px 0px 5px rgba(0, 0, 0, .15);
             z-index: -1;
         }

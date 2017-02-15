@@ -1,9 +1,11 @@
 <template>
     <div class="rule-explorer">
-        <div class="card is-fullwidth">
-            <header class="card-header">
-                <p class="card-header-title">PRECEPTS</p>
-            </header>
+        <div class="card">
+            <p class="card-header-title">
+                <span>PRECEPTS</span>&nbsp;<span style="color: darkgray">(requests)</span>
+            </p>
+        </div>
+        <div class="card">
             <vm-precept-selector></vm-precept-selector>
             <vm-precept-edit
                     v-model="preceptWorker.precept"
@@ -21,9 +23,9 @@
 
   export default {
     data () {
-        return {
-          preceptWorker
-        }
+      return {
+        preceptWorker
+      }
     },
     components: {
       vmPreceptSelector,

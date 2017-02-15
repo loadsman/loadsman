@@ -17,12 +17,12 @@ module.exports = {
   module: {
     rules: [
       {
-        test: /\.sass$/,
-        loaders: ['style-loader', 'css-loader', 'sass-loader?indentedSyntax'],
-      },
-      {
         test: /\.sсss$/,
         loaders: ['style-loader', 'css-loader', 'sass-loader'],
+      },
+      {
+        test: /\.sass$/,
+        loaders: ['style-loader', 'css-loader', 'sass-loader?indentedSyntax'],
       },
       {
         test: /\.css$/,

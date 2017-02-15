@@ -7,6 +7,8 @@
             ></vm-rule-explorer>
             <vm-precept-explorer v-if="localRouter.path === 'precepts'"
             ></vm-precept-explorer>
+            <vm-project-explorer v-if="localRouter.path === 'projects'"
+            ></vm-project-explorer>
         </div>
     </div>
 </template>
@@ -15,21 +17,18 @@
 
   import localRouter from '../instances/localRouter.js'
 
-  import IframeListener from '../IframeListener.js'
+  import iframeListener from '../instances/iframeListener.js'
 
   import vmNavigation from './navigation/navigation.vue'
 
   import vmRuleExplorer from './rule/rule-explorer.vue'
   import vmPreceptExplorer from './precept/precept-explorer.vue'
+  import vmProjectExplorer from './project/project-explorer.vue'
 
   export default {
-    mounted(){
-
-    },
     data (){
       return {
         localRouter,
-        iframeListener: new IframeListener,
         text: 'Some text',
       }
     },
@@ -38,13 +37,11 @@
 
       vmRuleExplorer,
       vmPreceptExplorer,
+      vmProjectExplorer,
     },
     methods: {
       closeIframe (){
-        parent.postMessage({
-          from: 'loadsmanIframe',
-          command: 'closeIframe'
-        }, '*')
+        iframeListener.sendCommand('closeIframe')
       },
     },
   }

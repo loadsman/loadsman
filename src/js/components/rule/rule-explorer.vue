@@ -1,9 +1,9 @@
 <template>
     <div class="rule-explorer">
-        <div class="card is-fullwidth">
-            <header class="card-header">
-                <p class="card-header-title">RULES</p>
-            </header>
+        <div class="card">
+            <p class="card-header-title">RULES</p>
+        </div>
+        <div class="card">
             <div class="rule-explorer__body">
                 <div class="columns is-mobile">
                     <div class="column is-4">
@@ -26,9 +26,9 @@
 
   export default {
     data () {
-        return {
-          selectedRule: null
-        }
+      return {
+        selectedRule: null
+      }
     },
     components: {
       vmRuleSelector,
@@ -41,8 +41,11 @@
     .rule-explorer {
         height: 100%;
         padding: 10px;
-        .rule-explorer__body{
+        .rule-explorer__body {
             padding: 10px;
+        }
+        .card + .card {
+            margin-top: 10px;
         }
     }
 </style>

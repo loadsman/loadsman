@@ -10,10 +10,11 @@ module.exports = function () {
     entry: './src/main.js',
     output: {
       path: path.resolve(__dirname, './extension/build'),
-      publicPath: '/extension/build/',
+      // publicPath: 'build/',
       filename: 'js/[name].js',
       chunkFilename: 'js/[name].js',
       hashFunction: 'sha256',
+      pathinfo: true,
     },
     stats: {
       colors: true,
@@ -76,7 +77,7 @@ module.exports = function () {
         },
         {
           test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
-          loader: 'file-loader?name=fonts/[name].[ext]'
+          loader: 'url-loader'
         }
       ]
     },
