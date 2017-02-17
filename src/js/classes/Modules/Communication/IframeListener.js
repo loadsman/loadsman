@@ -1,4 +1,4 @@
-export default class {
+export default class IframeListener {
   listen(command, closure) {
     window.addEventListener('message', (event) => {
       let response = event.data

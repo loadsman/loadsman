@@ -5,3 +5,13 @@ $primary: #1fc8db;
 
 @import "~bulma/bulma.sass";
 
+.card + .card {
+  margin-top: 10px;
+}
+
+.page {
+  padding: 10px;
+}
+
+
+

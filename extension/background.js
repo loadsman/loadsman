@@ -1,13 +1,8 @@
-function getAllProjects() {
-  return new Promise((resolve) => {
-    chrome.storage.local.get('projects', resolve)
-  })
-}
+function actWithStorage(method, data) {
+  let storage = chrome.storage.local
 
-function saveAllProjects(projects){
-  chrome.storage.local.set({projects})
-  chrome.storage.local.get('projects', (data) => {
-    console.log(data)
+  return new Promise((resolve) => {
+    method === 'get' ? storage.get(data, response => {resolve(response[data])}) : storage.set(data, resolve)
   })
 }
 
@@ -35,19 +30,15 @@ chrome.runtime.onMessage.addListener(
         return
       }
 
-      if (request.command === 'getAllProjects'){
-        getAllProjects().then((projects) => {
+      if (request.command === 'extensionStorageRequest') {
+        actWithStorage(data.method, data.data).then((result) => {
+          console.log(result)
           let response = {
             requestId: data.requestId,
-            projects,
+            data: result,
           }
-          sendMessage('haveAllProjects', sender.tab.id, response)
+          sendMessage('extensionStorageResponse', sender.tab.id, response)
         })
-      }
-
-      if (request.command === 'saveAllProjects'){
-        console.log('saveAllProjects')
-        saveAllProjects(data.projects)
       }
     }
 )

@@ -1,0 +1,15 @@
+.load-spinner {
+  @extend .loader;
+  border-left-color: rgba(84, 70, 75, 0.69);
+  border-bottom-color: rgba(84, 70, 75, 0.69);
+  border-width: 3px;
+  background-color: rgba(255, 255, 255, 0.51);
+  width: 40px;
+  height: 40px;
+}
+
+.load-spinner__container {
+  @extend .flex-center;
+  height: 60px;
+  background-color: #d1d1d1;
+}

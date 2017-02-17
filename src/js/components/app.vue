@@ -3,6 +3,8 @@
         <vm-navigation class="loadsman-app__navigation"></vm-navigation>
 
         <div class="loadsman-app__main">
+            <vm-main-page v-if="localRouter.path === 'main-page'"
+            ></vm-main-page>
             <vm-rule-explorer v-if="localRouter.path === 'rules'"
             ></vm-rule-explorer>
             <vm-precept-explorer v-if="localRouter.path === 'precepts'"
@@ -21,6 +23,7 @@
 
   import vmNavigation from './navigation/navigation.vue'
 
+  import vmMainPage from './main-page/main-page.vue'
   import vmRuleExplorer from './rule/rule-explorer.vue'
   import vmPreceptExplorer from './precept/precept-explorer.vue'
   import vmProjectExplorer from './project/project-explorer.vue'
@@ -35,6 +38,7 @@
     components: {
       vmNavigation,
 
+      vmMainPage,
       vmRuleExplorer,
       vmPreceptExplorer,
       vmProjectExplorer,

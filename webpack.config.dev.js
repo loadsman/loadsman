@@ -85,6 +85,11 @@ module.exports = {
     hints: false
   },
   plugins: [
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: '"develop"'
+      }
+    }),
     new webpack.NamedModulesPlugin(),
   ],
   devtool: '#eval-source-map'

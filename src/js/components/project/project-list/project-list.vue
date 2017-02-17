@@ -4,9 +4,15 @@
         >{{project.name}}: {{project.domain}}
         </div>
         <pre>{{projects}}</pre>
+        <button @click="reload"
+                class="button is-primary"
+        >
+            Get all projects
+        </button>
         <button @click="create"
                 class="button is-primary"
-        >Create new project
+        >
+            Create new project
         </button>
     </div>
 </template>
@@ -19,6 +25,8 @@
 
   import vmProjectItem from './project-item.vue'
 
+  import projectRepository from '../../../instances/projectRepository.js'
+
   export default {
     components: {
       vmProjectItem,
@@ -29,15 +37,20 @@
       }
     },
     created(){
-      projectWorker.getProjects().then((projects) => {
-        console.log(projects)
-      })
+      this.reload()
     },
     methods: {
+      reload(){
+        projectRepository.getAll().then((projects) => {
+          console.log(projects)
+          this.projects = projects
+        })
+      },
       create (){
-        this.projects.push(new Project(window.top.location.hostname))
+        let project = new Project(window.top.location.host)
+        this.projects.push(project)
 
-        projectWorker.saveProjects(this.projects)
+        projectRepository.saveAll(this.projects)
       },
     },
   }

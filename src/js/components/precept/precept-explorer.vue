@@ -1,5 +1,5 @@
 <template>
-    <div class="rule-explorer">
+    <div class="rule-explorer page">
         <div class="card">
             <p class="card-header-title">
                 <span>PRECEPTS</span>&nbsp;<span style="color: darkgray">(requests)</span>

@@ -1,5 +1,11 @@
 <template>
     <div class="navigation">
+        <vm-navigation-item title="Main page"
+                            :active="localRouter.path === 'main-page'"
+                            @click="localRouter.setPath('main-page')"
+        >
+            <span class="icon"><i class="fa fa-star"></i></span>
+        </vm-navigation-item>
         <vm-navigation-item title="Rules"
                             :active="localRouter.path === 'rules'"
                             @click="localRouter.setPath('rules')"

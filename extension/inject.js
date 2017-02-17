@@ -1,9 +1,6 @@
 (function (document, chrome) {
   var frame
 
-  // NOTE Conceptually, it's better to check for exception id for security reasons.
-  // But it's kinda complicated so I just pass name to avoid conflicts.
-
   // we proxy message from loadsman extension to loadsman iframe and backwards.
   // loadsman-extension -> loadsman-iframe
   chrome.runtime.onMessage.addListener((data, sender, sendResponse) => {
@@ -63,7 +60,8 @@
     // Explicitly set border width to avoid flashing of the iframe:
     frame.style.borderWidth = 0
     // Here we fetch main because if we pass main.html as src
-    // origin will not be the same as it was for original page
+    // origin will not be the same as it was for original page.
+    // And that will surely trigger CORS protection.
     let source = chrome.runtime.getURL('main.html')
     fetch(source)
         .then(function (response) {
