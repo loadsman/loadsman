@@ -34,6 +34,8 @@
     </div>
 </template>
 
+
+
 <script>
   import _ from 'lodash'
   import Rule from '../../../classes/Entities/Rule.js'
@@ -66,16 +68,10 @@
       },
       refresh (){
         this.ruleObserver.send('get-many').then(({data}) => {
-          ruleStorage.truncate() // Clear `Rule` database.
-          // Populate database with fresh `Rule` entries.
-          data.forEach((item) => {
-            let rule = Object.assign(new Rule, item)
-            ruleStorage.create(rule)
+          let rules: Array<Rule> = data.map((rule) => {
+            return Object.assign(new Rule, rule)
           })
-          // Read from database into component.
-          ruleStorage.getAll().then((rules: Array<Rule>) => {
-            ruleCollection.setItems(rules)
-          })
+          this.ruleCollection.setRules(rules)
         })
       }
     },
@@ -99,7 +95,7 @@
 //          }
 //        })
 
-        return this.ruleCollection.items
+        return this.ruleCollection.rules
       }
     }
   }

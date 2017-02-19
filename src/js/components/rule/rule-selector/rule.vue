@@ -5,9 +5,7 @@
             {{method}}
         </div>
         <div class="rule__text-block ">
-            <span class="rule__text"
-                  :class="{'has-error': hasError}"
-            >{{rule.path}}</span>
+            <span class="rule__text">{{rule.uri}}</span>
         </div>
     </div>
 </template>
@@ -21,9 +19,6 @@
       vmMethodButton
     },
     computed: {
-      hasError (){
-        return this.rule.errors.length !== 0
-      },
       method(){
         return this.rule.methods[0]
       }

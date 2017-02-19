@@ -1,7 +1,10 @@
 <template>
     <div class="rule-explorer page">
         <div class="card">
-            <p class="card-header-title">RULES</p>
+            <p class="card-header-title">
+                <span>RULES</span>&nbsp;<span
+                    style="color: darkgray">(routes)</span>
+            </p>
         </div>
 
         <div class="card">

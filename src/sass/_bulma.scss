@@ -5,8 +5,27 @@ $primary: #1fc8db;
 
 @import "~bulma/bulma.sass";
 
-.card + .card {
-  margin-top: 10px;
+.card {
+  margin-bottom: 10px;
+}
+
+.table {
+  margin-bottom: 10px;
+}
+
+.content.is-inverted{
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    color: $white;
+  }
+  a {
+    color: $white;
+    text-decoration: underline;
+  }
 }
 
 .page {

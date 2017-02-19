@@ -1,6 +1,7 @@
 export default class {
   constructor() {
     this.name = ''
-    this.version = '1'
+    this.version = ''
+    this.features = []
   }
 }

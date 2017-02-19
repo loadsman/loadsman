@@ -1,3 +1,5 @@
 import RuleCollection from '../classes/Modules/Rule/RuleCollection.js'
 
-export default new RuleCollection
+let ruleCollection = new RuleCollection()
+
+export default ruleCollection

@@ -1,10 +1,10 @@
 import Rule from '../../Entities/Rule.js'
 
 export default class RuleCollection {
-  constructor(items: Array<Rule> = []){
-    this.setItems(items)
+  constructor(){
+    this.rules = []
   }
-  setItems(items: Array<Rule>){
-    this.items = items
+  setRules(rules: Array<Rule>){
+    this.rules = rules
   }
 }

@@ -1,8 +1,8 @@
 import AjaxObserver from '../../Ajax/AjaxObserver.js'
 import fetchAjaxFactory from '../../../instances/fetchAjaxFactory.js'
 
-class RuleRepository {
-    getDefaultOptions(){
+class LoadsmanObserversFactory {
+  getDefaultOptions() {
     return {
       method: 'post',
       credentials: true,
@@ -10,14 +10,8 @@ class RuleRepository {
         'Content-Type': 'application/json',
       },
       interceptResponse: [
-        promise => new Promise((resolve, reject) => {
-          promise.then((response) => {
-            response.json().then((jsonResponse) => {
-              resolve(jsonResponse)
-            }).catch((result) => {
-              reject(result)
-            })
-          })
+        (promise: Promise) => promise.then((response) => {
+          return response.data
         })
       ]
     }
@@ -29,6 +23,13 @@ class RuleRepository {
 
     return fetchAjaxFactory.createObserver(options)
   }
+
+  getFrameworkObserver(): AjaxObserver {
+    let options = this.getDefaultOptions()
+    options.baseURL = '/loadsman/framework/'
+
+    return fetchAjaxFactory.createObserver(options)
+  }
 }
 
-export default RuleRepository
+export default LoadsmanObserversFactory

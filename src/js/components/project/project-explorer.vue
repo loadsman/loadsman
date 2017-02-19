@@ -1,7 +1,9 @@
 <template>
     <div class="project-explorer page">
         <div class="card">
-            <p class="card-header-title">PROJECTS</p>
+            <p class="card-header-title">
+                <span>PROJECTS</span>&nbsp;<span style="color: darkgray">(collections)</span>
+            </p>
         </div>
         <div class="card">
             <vm-project-list></vm-project-list>

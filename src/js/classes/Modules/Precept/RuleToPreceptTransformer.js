@@ -10,7 +10,7 @@ export default class {
     let precept = new Precept()
 
     precept.method = rule.methods[0]
-    precept.path = rule.path
+    precept.uri = rule.uri
     precept.name = rule.name
 
     return precept

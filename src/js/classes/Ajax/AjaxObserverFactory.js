@@ -1,5 +1,3 @@
-import _ from 'lodash'
-
 import AdapterContract from './Adapters/AdapterContract'
 import AjaxObserver from './AjaxObserver'
 import AjaxOptions from './Adapters/AjaxOptions'

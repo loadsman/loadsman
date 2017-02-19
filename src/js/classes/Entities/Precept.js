@@ -4,7 +4,7 @@ import HeaderCollection from '../Modules/Header/HeaderCollection.js'
  * @class Precept
  * @property _id {String}
  * @property body {String} json request
- * @property path {String}
+ * @property uri {String}
  * @property name {Number}
  * @property method {String}
  * @property headers {String}
@@ -15,7 +15,7 @@ class Precept {
   constructor() {
     this._id = undefined
     this.body = '{}'
-    this.path = '/'
+    this.uri = '/'
     this.name = ''
     this.method = 'GET'
     this.setHeaders(new HeaderCollection([]))

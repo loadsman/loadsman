@@ -1,17 +1,18 @@
+import axios from 'axios'
+
 import AbstractAdapter from './AdapterContract'
 import AjaxOptions from './AjaxOptions'
 
-class FetchAdapter extends AbstractAdapter {
+export default class AxiosAdapter extends AbstractAdapter {
   send(options: AjaxOptions): Promise {
-    let input = options.getFullUrl()
-    let init = {
-      method: options.method,
-      headers: options.headers, // TODO Support headers
-      body: options.data,
-      credentials: options.credentials,
-    }
 
-    let promise = fetch(input, init)
+    let promise = axios({
+      url: options.getFullUrl(),
+      method: options.method,
+      headers: options.headers,
+      withCredentials: options.credentials,
+      data: options.data,
+    })
 
     return this._applyReponseInterceptors(promise, options)
   }
@@ -22,5 +23,3 @@ class FetchAdapter extends AbstractAdapter {
     }, promise)
   }
 }
-
-export default FetchAdapter
