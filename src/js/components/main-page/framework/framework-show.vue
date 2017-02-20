@@ -1,7 +1,14 @@
 <template>
     <table class="table">
         <tr>
-            <th colspan="2">Framework</th>
+            <th colspan="2">
+                Framework
+                <div class="button is-small is-pulled-right"
+                   @click="$emit('reload')"
+                >
+                    <i class="fa fa-refresh"></i>
+                </div>
+            </th>
         </tr>
         <tr>
             <td>Name</td>

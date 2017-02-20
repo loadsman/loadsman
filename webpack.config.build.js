@@ -27,21 +27,21 @@ module.exports = function () {
         {
           test: /\.sass$/,
           loader: ExtractTextPlugin.extract({
-            fallbackLoader: 'style-loader',
+            fallback: 'style-loader',
             loader: 'css-loader!sass-loader',
           }),
         },
         {
           test: /\.sсss$/,
           loader: ExtractTextPlugin.extract({
-            fallbackLoader: 'style-loader',
+            fallback: 'style-loader',
             loader: 'css-loader!sass-loader',
           }),
         },
         {
           test: /\.css$/,
           loader: ExtractTextPlugin.extract({
-            fallbackLoader: 'style-loader',
+            fallback: 'style-loader',
             loader: 'css-loader',
           }),
         },
@@ -52,7 +52,7 @@ module.exports = function () {
             loaders: {
               css: ExtractTextPlugin.extract({
                 loader: 'css-loader',
-                fallbackLoader: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
+                fallback: 'vue-style-loader' // <- this is a dep of vue-loader, so no need to explicitly install if using npm3
               }),
               // Since sass-loader (weirdly) has SCSS as its default parse mode, we map
               // the "scss" and "sass" values for the lang attribute to the right configs here.

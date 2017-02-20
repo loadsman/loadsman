@@ -21,16 +21,12 @@
 
                 </div>
             </div>
-            <div key="framework" v-if="framework" style="padding-bottom: 10px">
+            <div key="framework" v-if="framework">
                 <div class="card">
                     <vm-framework-show :framework="framework"
+                                       @reload="reload"
                     ></vm-framework-show>
                 </div>
-                <a class="button"
-                   @click="reload"
-                >
-                    Reload framework data
-                </a>
             </div>
         </transition>
         <div class="card">
