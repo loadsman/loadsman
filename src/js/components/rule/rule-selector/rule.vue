@@ -11,12 +11,10 @@
 </template>
 
 <script>
-  import vmMethodButton from '../../ligth-components/method-button.vue'
   import _ from 'lodash'
 
   export default {
     components: {
-      vmMethodButton
     },
     computed: {
       method(){

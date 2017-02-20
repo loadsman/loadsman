@@ -32,6 +32,10 @@ export default class ObserverSpawner {
     return axiosAjaxFactory.createObserver(options)
   }
 
+  getPreceptObserver(): AjaxObserver {
+    return storageAccessFactory.createObserver({})
+  }
+
   getProjectObserver(): AjaxObserver {
     return storageAccessFactory.createObserver({})
   }

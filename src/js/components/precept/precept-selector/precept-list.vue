@@ -1,61 +1,54 @@
 <template>
-    <div class="requests-selector card is-fullwidth">
+    <div class="requests-selector">
         <header class="card-header">
             <!--<vm-search-panel class="card-header-title"-->
             <!--&gt;</vm-search-panel>-->
         </header>
-        <div class="notification"
-             v-if="! filteredRequests.length"
-             transition="fade-in"
-        >
-            No requests found
-        </div>
-        <vm-request v-for="request in filteredRequests"
+        <div v-if="precepts.length">
+            <vm-precept
+                    v-for="precept in precepts"
                     class="is-fullwidth"
                     track-by="$index"
                     transition="slip"
-                    :request="request"
-        ></vm-request>
+                    :precept="precept"
+            ></vm-precept>
+        </div>
+
+        <div v-else-if="! loading"
+             class="notification"
+             transition="fade-in"
+        >
+            No requests found. <a>Create new</a>.
+        </div>
     </div>
 </template>
 
 <script>
   import _ from 'lodash'
 
-  import PreceptStorage from '../../../classes/Modules/Precept/PreceptStorage.js'
+  import vmPrecept from './precept.vue'
 
-  //  import vmRequest from './request.vue'
-  //  import vmSearchPanel from  '../search/search-panel.vue'
+  import preceptWorker from '../../../instances/workers/preceptWorker.js'
 
   export default {
     data () {
-      return {preceptStorage: new PreceptStorage}
+      return {
+        preceptWorker
+      }
     },
     components: {
-//      vmRequest,
+      vmPrecept,
 //      vmSearchPanel
     },
-    computed: {},
     created (){
-//      this.$store.dispatch('loadRequests')
+
     },
     computed: {
-      filteredRequests (){
-//        let {search, requests} = this.$store.getters
-//        search = search.toUpperCase()
-//        let toDisplay = []
-//
-//        requests.forEach(function (request) {
-//          let isSelected = request.method.toUpperCase()
-//                                  .includes(search)
-//              || request.path.toUpperCase().includes(search)
-//              || (request.name && request.name.toUpperCase()
-//                                         .includes(search))
-//
-//          isSelected && toDisplay.push(request)
-//        })
-
-        return []
+      precepts (){
+        return preceptWorker.preceptCollection.precepts
+      },
+      loading(){
+        return preceptWorker.preceptObserver.loading
       }
     },
     methods: {

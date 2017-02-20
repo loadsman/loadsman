@@ -25,7 +25,8 @@ export default class LocalStorage {
 
     return new Promise((resolve) => {
       this.store.findOne(filter).exec((err, docs) => {
-        resolve(docs.value)
+        let value = docs ? docs.value : docs
+        resolve(value)
       })
     })
   }

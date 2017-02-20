@@ -2,6 +2,8 @@ import Project from '../../Entities/Project.js'
 import ProjectCollection from './ProjectCollection.js'
 import ObserverSpawner from '../../Ajax/ObserverSpawner.js'
 
+import preceptWorker from '../../../instances/workers/preceptWorker.js'
+
 export default class ProjectWorker {
   constructor() {
     this.currentProject = null
@@ -19,15 +21,16 @@ export default class ProjectWorker {
         .then((projects: Array<Project>) => {
           this.projectCollection.setProjects(projects)
           this.refreshCurrentProject()
+          this.loadCurrentProjectPrecepts()
         })
   }
 
-  saveProject(project: Project){
+  saveProject(project: Project) {
     this.projectCollection.projects.push(project)
     this.saveAllProjects()
   }
 
-  saveAllProjects(){
+  saveAllProjects() {
     let payload = {
       projects: this.projectCollection.projects
     }
@@ -40,5 +43,10 @@ export default class ProjectWorker {
     this.currentProject = this.projectCollection.projects.find((project: Project) => {
       return currentHost === project.host
     })
+  }
+
+  loadCurrentProjectPrecepts() {
+    preceptWorker.currentProject = this.currentProject
+    preceptWorker.refreshList()
   }
 }

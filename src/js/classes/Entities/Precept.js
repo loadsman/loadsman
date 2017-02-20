@@ -1,3 +1,5 @@
+import moment from 'moment'
+
 import HeaderCollection from '../Modules/Header/HeaderCollection.js'
 
 /**
@@ -19,8 +21,8 @@ class Precept {
     this.name = ''
     this.method = 'GET'
     this.setHeaders(new HeaderCollection([]))
-    this.createdAt = Date.now()
-    this.updatedAt = Date.now()
+    this.createdAt = moment().unix()
+    this.updatedAt = moment().unix()
   }
 
   setMethod(method: string): void {

@@ -6,9 +6,12 @@
             </p>
         </div>
         <div class="card">
-            <vm-precept-selector></vm-precept-selector>
+            <div class="button is-create"
+                 @click="createPrecept"
+            >Create precept</div>
+            <vm-precept-list></vm-precept-list>
             <vm-precept-edit
-                    v-model="preceptWorker.precept"
+                    v-model="preceptWorker.currentPrecept"
                     @updated="updated"
             ></vm-precept-edit>
         </div>
@@ -16,7 +19,8 @@
 </template>
 
 <script>
-  import vmPreceptSelector from './precept-selector/precept-selector.vue'
+    import Precept from '../../classes/Entities/Precept.js'
+  import vmPreceptList from './precept-selector/precept-list.vue'
   import vmPreceptEdit from './precept-editor/precept-edit.vue'
 
   import preceptWorker from '../../instances/workers/preceptWorker.js'
@@ -28,10 +32,15 @@
       }
     },
     components: {
-      vmPreceptSelector,
+      vmPreceptList,
       vmPreceptEdit,
     },
     methods: {
+      createPrecept(){
+        let precept = new Precept()
+        preceptWorker.addPrecept(precept)
+        preceptWorker.currentPrecept = precept
+      },
       updated (){
         console.log('updated')
       },
