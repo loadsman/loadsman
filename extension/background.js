@@ -18,7 +18,7 @@ function sendMessage(command, tabId, data = {}) {
  * When clicked on extension icon message will be sent.
  */
 chrome.browserAction.onClicked.addListener((tab) => {
-  sendMessage('closeIframe', tab.id)
+  sendMessage('toggleIframe', tab.id)
 })
 
 // Accept message
@@ -32,7 +32,6 @@ chrome.runtime.onMessage.addListener(
 
       if (request.command === 'extensionStorageRequest') {
         actWithStorage(data.method, data.data).then((result) => {
-          console.log(result)
           let response = {
             requestId: data.requestId,
             data: result,

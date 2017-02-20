@@ -23,7 +23,7 @@
       return
     }
 
-    if (data.command === 'closeIframe') {
+    if (data.command === 'toggleIframe') {
       toggleIframe()
       return
     }
