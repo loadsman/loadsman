@@ -21,7 +21,7 @@
 
                 </div>
             </div>
-            <div key="framework" v-if="framework">
+            <div key="framework" v-if="framework" style="padding-bottom: 10px">
                 <div class="card">
                     <vm-framework-show :framework="framework"
                     ></vm-framework-show>
@@ -33,14 +33,18 @@
                 </a>
             </div>
         </transition>
+        <div class="card">
+            <vm-current-project></vm-current-project>
+        </div>
     </div>
 </template>
 
 <script>
-  import RuleObserverFactory from '../../classes/Modules/Rule/RuleObserverFactory.js'
+  import RuleObserverFactory from '../../classes/Ajax/ObserverSpawner.js'
 
   import Framework from '../../classes/Entities/Framework.js'
   import vmFrameworkShow from './framework/framework-show.vue'
+  import vmCurrentProject from './project/current-project.vue'
 
   import currentFramework from '../../instances/currentFramework.js'
 
@@ -48,11 +52,12 @@
     data () {
       return {
         frameworkObserver: new RuleObserverFactory().getFrameworkObserver(),
-        currentFramework: currentFramework,
+        currentFramework,
       }
     },
     components: {
       vmFrameworkShow,
+      vmCurrentProject,
     },
     created(){
       this.reload()

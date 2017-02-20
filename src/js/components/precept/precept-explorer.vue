@@ -19,7 +19,7 @@
   import vmPreceptSelector from './precept-selector/precept-selector.vue'
   import vmPreceptEdit from './precept-editor/precept-edit.vue'
 
-  import preceptWorker from '../../instances/preceptWorker.js'
+  import preceptWorker from '../../instances/workers/preceptWorker.js'
 
   export default {
     data () {

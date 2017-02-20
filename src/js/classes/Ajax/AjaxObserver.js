@@ -9,7 +9,7 @@ import AjaxOptions from './Adapters/AjaxOptions.js'
  * @property loadedFail {Boolean} Triggered catch at least once.
  * @property lastLoadOk {Boolean} If last load was successful.
  */
-class AjaxObserver {
+export default class AjaxObserver {
 
   constructor(send: Function, options: AjaxOptions) {
     this._send = send // gives access to actual ajax send. Accepts AjaxOptions.
@@ -54,5 +54,3 @@ class AjaxObserver {
     return promise
   }
 }
-
-export default AjaxObserver

@@ -1,9 +1,8 @@
 <template>
     <div class="project-list">
         <div v-for="project in projects"
-        >{{project.name}}: {{project.domain}}
+        >{{project.name}}: {{project.host}}
         </div>
-        <pre>{{projects}}</pre>
         <button @click="reload"
                 class="button is-primary"
         >
@@ -21,11 +20,9 @@
   import Project from '../../../classes/Entities/Project.js'
   import ProjectCollection from '../../../classes/Modules/Project/ProjectCollection.js'
 
-  import projectWorker from '../../../instances/projectWorker.js'
+  import projectWorker from '../../../instances/workers/projectWorker.js'
 
   import vmProjectItem from './project-item.vue'
-
-  import projectRepository from '../../../instances/projectRepository.js'
 
   export default {
     components: {
@@ -33,7 +30,7 @@
     },
     data () {
       return {
-        projects: []
+        projectWorker
       }
     },
     created(){
@@ -41,18 +38,19 @@
     },
     methods: {
       reload(){
-        projectRepository.getAll().then((projects) => {
-          console.log(projects)
-          this.projects = projects
-        })
+        projectWorker.refreshList()
       },
       create (){
-        let project = new Project(window.top.location.host)
-        this.projects.push(project)
-
-        projectRepository.saveAll(this.projects)
+        let project = new Project(top.window.location.host)
+        projectWorker.saveProject(project)
+        projectWorker.refreshCurrentProject()
       },
     },
+    computed: {
+      projects(){
+        return projectWorker.projectCollection.projects
+      },
+    }
   }
 </script>
 

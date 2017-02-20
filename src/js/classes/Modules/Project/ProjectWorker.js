@@ -1,47 +1,44 @@
-import iframeListener from '../../../instances/iframeListener.js'
-
-import ProjectCollection from './ProjectCollection.js'
 import Project from '../../Entities/Project.js'
-
-import uniqid from 'uniqid'
+import ProjectCollection from './ProjectCollection.js'
+import ObserverSpawner from '../../Ajax/ObserverSpawner.js'
 
 export default class ProjectWorker {
   constructor() {
-    this.resolves = []
-    iframeListener.listen('haveAllProjects', (data) => {
-      let closure = this.resolves[data.requestId]
-      delete this.resolves[data.requestId]
-      if (closure) {
-        closure(data.projects)
-      }
-    })
+    this.currentProject = null
+    this.projectCollection = new ProjectCollection()
+    this.projectObserver = new ObserverSpawner().getProjectObserver()
   }
 
-  getProjects() {
-    let requestId = uniqid()
-
-    iframeListener.sendCommand('getAllProjects', {requestId})
-
-    return new Promise((resolve) => {
-      this.resolves[requestId] = resolve
-    })
+  refreshList() {
+    this.projectObserver.send({method: 'get', data: 'projects'})
+        .then((projects: Array) => {
+          return projects.map((project) => {
+            return Object.assign(new Project(), project)
+          })
+        })
+        .then((projects: Array<Project>) => {
+          this.projectCollection.setProjects(projects)
+          this.refreshCurrentProject()
+        })
   }
 
-  saveProjects(projects: Array) {
-    iframeListener.sendCommand('saveAllProjects', {projects})
+  saveProject(project: Project){
+    this.projectCollection.projects.push(project)
+    this.saveAllProjects()
+  }
+
+  saveAllProjects(){
+    let payload = {
+      projects: this.projectCollection.projects
+    }
+    this.projectObserver.send({method: 'set', data: payload})
+  }
+
+  refreshCurrentProject() {
+    let currentHost = window.top.location.host
+
+    this.currentProject = this.projectCollection.projects.find((project: Project) => {
+      return currentHost === project.host
+    })
   }
 }
-
-// export default class {
-//   getAll(): Promise{
-//     return new Promise((resolve) => {
-//       .then((projects: Array) => {
-//         projects.map((project) => {
-//           return object.assign(new Project, project)
-//         })
-//
-//         resolve(new ProjectCollection(projects))
-//       })
-//     })
-//   }
-// }

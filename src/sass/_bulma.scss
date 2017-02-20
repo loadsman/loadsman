@@ -13,6 +13,11 @@ $primary: #1fc8db;
   margin-bottom: 10px;
 }
 
+a {
+  color: $text;
+  text-decoration: underline;
+}
+
 .content.is-inverted{
   h1,
   h2,
@@ -23,8 +28,7 @@ $primary: #1fc8db;
     color: $white;
   }
   a {
-    color: $white;
-    text-decoration: underline;
+
   }
 }
 

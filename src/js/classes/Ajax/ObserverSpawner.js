@@ -1,7 +1,8 @@
-import AjaxObserver from '../../Ajax/AjaxObserver.js'
-import fetchAjaxFactory from '../../../instances/fetchAjaxFactory.js'
+import AjaxObserver from './AjaxObserver.js'
+import axiosAjaxFactory from '../../instances/resources/axiosAjaxFactory.js'
+import storageAccessFactory from '../../instances/resources/storageAccessFactory.js'
 
-class LoadsmanObserversFactory {
+export default class ObserverSpawner {
   getDefaultOptions() {
     return {
       method: 'post',
@@ -21,15 +22,17 @@ class LoadsmanObserversFactory {
     let options = this.getDefaultOptions()
     options.baseURL = '/loadsman/rules/'
 
-    return fetchAjaxFactory.createObserver(options)
+    return axiosAjaxFactory.createObserver(options)
   }
 
   getFrameworkObserver(): AjaxObserver {
     let options = this.getDefaultOptions()
     options.baseURL = '/loadsman/framework/'
 
-    return fetchAjaxFactory.createObserver(options)
+    return axiosAjaxFactory.createObserver(options)
+  }
+
+  getProjectObserver(): AjaxObserver {
+    return storageAccessFactory.createObserver({})
   }
 }
-
-export default LoadsmanObserversFactory

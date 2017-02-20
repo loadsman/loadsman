@@ -34,7 +34,7 @@
   import Rule from '../../../classes/Entities/Rule.js'
   import RuleToPreceptTransformer from '../../../classes/Modules/Precept/RuleToPreceptTransformer.js'
 
-  import preceptWorker from '../../../instances/preceptWorker.js'
+  import preceptWorker from '../../../instances/workers/preceptWorker.js'
   import preceptStorage from '../../../instances/preceptStorage.js'
   import localRouter from '../../../instances/localRouter.js'
 

@@ -1,7 +1,11 @@
 import Project from '../../Entities/Project.js'
 
 export default class {
-  constructor(projects: Array<Project>){
+  constructor(){
+    this.projects = []
+  }
+
+  setProjects(projects: Array<Project>){
     this.projects = projects
   }
 }

@@ -1,20 +1,21 @@
 <template>
-    <div>
-        <table class="table">
-            <tr>
-                <td>Name</td>
-                <td>{{framework.name}}</td>
-            </tr>
-            <tr>
-                <td>Version</td>
-                <td>{{framework.version}}</td>
-            </tr>
-            <tr>
-                <td>Features</td>
-                <td>{{framework.features.join(', ')}}</td>
-            </tr>
-        </table>
-    </div>
+    <table class="table">
+        <tr>
+            <th colspan="2">Framework</th>
+        </tr>
+        <tr>
+            <td>Name</td>
+            <td>{{framework.name}}</td>
+        </tr>
+        <tr>
+            <td>Version</td>
+            <td>{{framework.version}}</td>
+        </tr>
+        <tr>
+            <td>Features</td>
+            <td>{{framework.features.join(', ')}}</td>
+        </tr>
+    </table>
 </template>
 
 <script>

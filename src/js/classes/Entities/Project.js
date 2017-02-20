@@ -1,9 +1,9 @@
 import uniqid from 'uniqid'
 
-export default class {
-  constructor(domain: string){
+export default class Project {
+  constructor(host: string){
     this._id = uniqid()
-    this.name = domain
-    this.domain = domain
+    this.name = host
+    this.host = host
   }
 }

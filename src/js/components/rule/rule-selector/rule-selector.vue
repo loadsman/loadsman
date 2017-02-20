@@ -3,7 +3,7 @@
         <div class="rule-selector__action-panel">
             <a class="button"
                @click="refresh"
-               :class="{'is-loading' : ruleObserver.loading}"
+               :class="{'is-loading' : loading}"
             >
                 <i class="fa fa-refresh"></i>
             </a>
@@ -13,7 +13,7 @@
         </div>
         <div class="routes-selector__notifications">
             <div class="notification"
-                 v-if="filteredRules.length === 0 && ! ruleObserver.loading"
+                 v-if="rules.length === 0 && ! loading"
                  transition="fade-in"
             >
                 No rules matched.
@@ -26,7 +26,7 @@
         </div>
 
         <div class="rule-selector__rules">
-            <vm-rule v-for="rule in filteredRules"
+            <vm-rule v-for="rule in rules"
                      @selected="selectRule(rule)"
                      :rule="rule"
             ></vm-rule>
@@ -39,11 +39,8 @@
 <script>
   import _ from 'lodash'
   import Rule from '../../../classes/Entities/Rule.js'
-  import RuleObserverFactory from '../../../classes/Modules/Rule/RuleObserverFactory.js'
 
-  import ruleCollection from '../../../instances/ruleCollection.js'
-
-  import ruleStorage from '../../../instances/ruleStorage.js'
+  import ruleWorker from '../../../instances/workers/ruleWorker.js'
 
   import vmRule from './rule.vue'
   //    import vmSearchPanel from  '../search/search-panel.vue'
@@ -51,8 +48,7 @@
   export default {
     data () {
       return {
-        ruleCollection,
-        ruleObserver: new RuleObserverFactory().getRuleObserver()
+        ruleWorker,
       }
     },
     components: {
@@ -67,35 +63,15 @@
         this.$emit('selected', rule)
       },
       refresh (){
-        this.ruleObserver.send('get-many').then(({data}) => {
-          let rules: Array<Rule> = data.map((rule) => {
-            return Object.assign(new Rule, rule)
-          })
-          this.ruleCollection.setRules(rules)
-        })
+        ruleWorker.refreshList()
       }
     },
     computed: {
-      filteredRules (){
-//        let {search, routes} = this.$store.getters
-//        search = search.toUpperCase()
-//        let toDisplay = []
-//
-//        routes.forEach(function (route) {
-//          if (
-//              route.methods.join(',').toUpperCase()
-//                   .includes(search)
-//              || route.path.toUpperCase().includes(search)
-//              || (route.action.controller && route.action.controller.toUpperCase()
-//                                                  .includes(search))
-//              || (route.name && route.name.toUpperCase()
-//                                     .includes(search))
-//          ) {
-//            toDisplay.push(route)
-//          }
-//        })
-
-        return this.ruleCollection.rules
+      rules(){
+        return ruleWorker.ruleCollection.rules
+      },
+      loading(){
+        return ruleWorker.ruleObserver.loading
       }
     }
   }
