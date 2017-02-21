@@ -1,0 +1,20 @@
+.request-method {
+  flex: 1 0;
+  text-align: center;
+  width: 60px;
+  height: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 12px;
+  background-color: gray;
+  &.request-method_get {
+    background-color: hsl(110, 50%, 90%);
+  }
+  &.request-method_post {
+    background-color: hsl(200, 50%, 90%);
+  }
+  &.request-method_delete {
+    background-color: hsl(10, 50%, 90%);
+  }
+}

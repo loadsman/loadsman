@@ -6,7 +6,9 @@
                 <div class="button is-small is-pulled-right"
                    @click="$emit('reload')"
                 >
-                    <i class="fa fa-refresh"></i>
+                    <div class="icon is-small">
+                        <i class="fa fa-refresh"></i>
+                    </div>
                 </div>
             </th>
         </tr>

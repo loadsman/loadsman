@@ -1,12 +1,15 @@
 <template>
     <div class="rule-selector">
         <div class="rule-selector__action-panel">
-            <a class="button"
-               @click="refresh"
-               :class="{'is-loading' : loading}"
+
+            <div class="button is-small"
+                 @click="refresh"
+                 :class="{'is-loading' : loading}"
             >
-                <i class="fa fa-refresh"></i>
-            </a>
+                <div class="icon is-small">
+                    <i class="fa fa-refresh"></i>
+                </div>
+            </div>
             <input type="text" class="input"
                    placeholder="Search doesn't work yet"
             >
@@ -33,7 +36,6 @@
         </div>
     </div>
 </template>
-
 
 
 <script>

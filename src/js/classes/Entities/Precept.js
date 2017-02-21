@@ -1,5 +1,7 @@
 import moment from 'moment'
 
+import uniqid from 'uniqid'
+
 import HeaderCollection from '../Modules/Header/HeaderCollection.js'
 
 /**
@@ -15,7 +17,7 @@ import HeaderCollection from '../Modules/Header/HeaderCollection.js'
  */
 class Precept {
   constructor() {
-    this._id = undefined
+    this._id = uniqid()
     this.body = '{}'
     this.uri = '/'
     this.name = ''

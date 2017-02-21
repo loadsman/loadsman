@@ -1,48 +1,53 @@
 <template>
     <div class="request-editor">
-        <div class="columns is-multiline is-desktop">
-            <div class="column is-full-desktop is-7-widescreen">
-                <div class="card is-fullwidth">
+        <div class="card is-fullwidth is-marginless">
+            <header class="card-header">
+                <p class="card-header-title">
+                    <input class="input is-expanded is-fullwidth"
+                           type="text"
+                           placeholder="Name"
+                           title="Title"
+                           v-model="editedPrecept.name"
+                    >
 
-                    <header class="card-header">
-                        <p class="card-header-title">
-                            <input class="input is-expanded is-fullwidth"
-                                   type="text"
-                                   placeholder="Name"
-                                   title="Title"
-                                   v-model="editedPrecept.name"
-                            >
-                        </p>
-                    </header>
+                    <input class="input is-expanded is-fullwidth"
+                           type="text"
+                           placeholder="Name"
+                           title="Title"
+                           v-model="editedPrecept.uri"
+                    >
+                </p>
+            </header>
+            <div class="button is-delete"
+                 @click="$emit('removed', precept)"
+            >Delete</div>
+            <div class="button is-save"
+                 @click="save"
+            >Save</div>
 
-                    <pre>{{value}}</pre>
-
-                    <div style="padding: 10px">
-                        <vm-navigation-tabs
-                                class="is-boxed"
-                                :pages="['data', 'headers']"
-                                v-model="mode"
-                        ></vm-navigation-tabs>
-                    </div>
-
-                    <!-- Editor -->
-                    <div v-if="mode === 'data'">
-                        <vm-json-editor :json="editedPrecept.body"
-                                        style="height: 300px"
-                                        @changed="editedPrecept.body = $event, changed = true"
-                        ></vm-json-editor>
-                    </div>
-
-                    <!-- Headers -->
-                    <div v-if="mode === 'headers'">
-                        <vm-headers v-model="editedPrecept.headers"
-                        ></vm-headers>
-                    </div>
-                </div>
+            <div style="padding: 10px">
+                <vm-navigation-tabs
+                        class="is-boxed"
+                        :pages="['data', 'headers']"
+                        v-model="mode"
+                ></vm-navigation-tabs>
             </div>
-            <div class="column is-full-desktop is-5-widescreen">
-                <vm-route-info></vm-route-info>
+
+            <!-- Editor -->
+            <div v-if="mode === 'data'">
+                <vm-json-editor :json="editedPrecept.body"
+                                style="height: 300px"
+                                @changed="editedPrecept.body = $event, changed = true"
+                ></vm-json-editor>
             </div>
+
+            <!-- Headers -->
+            <div v-if="mode === 'headers'">
+                <vm-headers v-model="editedPrecept.headers"
+                ></vm-headers>
+            </div>
+
+            <pre>{{precept}}</pre>
         </div>
     </div>
 </template>
@@ -54,7 +59,6 @@
 
   import Precept from '../../../classes/Entities/Precept.js'
   import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
-  //    import vmRouteInfo from './route-info/route-info.vue'
   import vmHeaders from './headers/headers.vue'
 
   import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
@@ -75,26 +79,20 @@
       this.refreshFromParent()
     },
     watch: {
-      value: 'refreshFromParent',
+      precept: 'refreshFromParent',
     },
     props: {
-      value: {
+      precept: {
         type: Precept,
       }
     },
     methods: {
-      loadAllPrecepts(){
-        let result = preceptStorage.getAllPrecepts()
-        console.log(result.exec((err, doc) => {
-          console.log(doc)
-        }))
-      },
-      savePrecept(){
-        preceptStorage.create(this.editedPrecept)
-        console.log(this.editedPrecept)
+      save(){
+        Object.assign(this.precept, this.editedPrecept)
+        this.$emit('updated', this.precept)
       },
       refreshFromParent(){
-        this.editedPrecept = Object.assign(new Precept(), this.value)
+        this.editedPrecept = Object.assign(new Precept(), this.precept)
       }
     },
   }
@@ -102,6 +100,6 @@
 
 <style scoped>
     .request-editor {
-        padding-bottom: 10px;
+
     }
 </style>

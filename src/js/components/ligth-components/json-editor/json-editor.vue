@@ -10,16 +10,16 @@
     props: {
       json: {}
     },
-    methods: {
-      initEditor(el, options, json){
-        this.$options.editor = new jsoneditor(el, options, json)
-      }
-    },
     data () {
       return {
         // We have to keep state in order to figure out,
         // whether json change derived from parent or self.
         editedJson: {},
+      }
+    },
+    methods: {
+      initEditor(el, options, json){
+        this.$options.editor = new jsoneditor(el, options, json)
       }
     },
     watch: {

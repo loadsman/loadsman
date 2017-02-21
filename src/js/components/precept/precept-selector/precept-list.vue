@@ -7,9 +7,9 @@
         <div v-if="precepts.length">
             <vm-precept
                     v-for="precept in precepts"
+                    @click="$emit('selected', precept)"
                     class="is-fullwidth"
                     track-by="$index"
-                    transition="slip"
                     :precept="precept"
             ></vm-precept>
         </div>

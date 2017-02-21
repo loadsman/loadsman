@@ -1,25 +1,42 @@
 <template>
     <div class="rule-explorer page">
         <div class="card">
-            <p class="card-header-title">
+            <div class="card-header-title">
                 <span>PRECEPTS</span>&nbsp;<span style="color: darkgray">(requests)</span>
-            </p>
+                <div class="flex-divider"></div>
+                <div class="button is-create is-small"
+                     style="font-weight: normal"
+                     @click="createPrecept"
+                >
+                    <span class="icon is-small">
+                        <i class="fa fa-plus"></i>
+                    </span>
+                </div>
+            </div>
         </div>
-        <div class="card">
-            <div class="button is-create"
-                 @click="createPrecept"
-            >Create precept</div>
-            <vm-precept-list></vm-precept-list>
-            <vm-precept-edit
-                    v-model="preceptWorker.currentPrecept"
-                    @updated="updated"
-            ></vm-precept-edit>
+
+        <div class="card" style="position: static">
+            <div class="columns is-gapless">
+                <div class="column" style="flex: 1 0 350px">
+                    <vm-precept-list @selected="setCurrentPrecept($event)"
+                    ></vm-precept-list>
+                </div>
+                <div class="column"
+                     style="flex: 1 1 100%"
+                     v-if="preceptWorker.currentPrecept"
+                >
+                    <vm-precept-edit :precept="preceptWorker.currentPrecept"
+                                     @updated="updated($event)"
+                                     @removed="remove($event)"
+                    ></vm-precept-edit>
+                </div>
+            </div>
         </div>
     </div>
 </template>
 
 <script>
-    import Precept from '../../classes/Entities/Precept.js'
+  import Precept from '../../classes/Entities/Precept.js'
   import vmPreceptList from './precept-selector/precept-list.vue'
   import vmPreceptEdit from './precept-editor/precept-edit.vue'
 
@@ -39,11 +56,18 @@
       createPrecept(){
         let precept = new Precept()
         preceptWorker.addPrecept(precept)
+        this.setCurrentPrecept(precept)
+      },
+      setCurrentPrecept(precept: ?Precept){
         preceptWorker.currentPrecept = precept
       },
-      updated (){
-        console.log('updated')
+      updated (precept: Precept){
+        preceptWorker.saveAllPrecepts()
       },
+      remove (precept: Precept){
+        this.setCurrentPrecept(null)
+        preceptWorker.removePrecept(precept)
+      }
     },
   }
 </script>

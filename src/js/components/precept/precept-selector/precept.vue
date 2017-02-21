@@ -1,7 +1,7 @@
 <template>
-    <div class="rule" @click="$emit('selected')">
-        <div class="rule__method"
-             :class="'rule_method_' + precept.method.toLowerCase()">
+    <div class="rule" @click="$emit('click')">
+        <div class="request-method"
+             :class="'request-method_' + precept.method.toLowerCase()">
             {{precept.method}}
         </div>
         <div class="rule__text-block ">

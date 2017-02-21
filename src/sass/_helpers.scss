@@ -11,3 +11,7 @@
 .flex-center {
   @include flex-center();
 }
+
+.flex-divider {
+  flex: 1 0;
+}

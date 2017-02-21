@@ -34,6 +34,12 @@ class PreceptWorker {
     this.saveAllPrecepts()
   }
 
+  removePrecept(precept: Precept){
+    let index = this.preceptCollection.precepts.indexOf(precept)
+    this.preceptCollection.precepts.splice(index, 1)
+    this.saveAllPrecepts()
+  }
+
   saveAllPrecepts(){
     let payload = {}
     payload[this.getStorageKey()] = this.preceptCollection.precepts
