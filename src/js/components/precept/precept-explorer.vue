@@ -17,7 +17,7 @@
 
         <div class="card" style="position: static">
             <div class="columns is-gapless">
-                <div class="column" style="flex: 1 0 350px">
+                <div class="column" style="flex: 1 0 350px; width: 350px">
                     <vm-precept-list @selected="setCurrentPrecept($event)"
                     ></vm-precept-list>
                 </div>
