@@ -51,7 +51,7 @@
       createPrecept (){
         let precept = new RuleToPreceptTransformer().transform(this.rule)
         preceptStorage.create(precept)
-        preceptWorker.setPrecept(precept)
+        preceptWorker.addPrecept(precept)
         localRouter.setPath('precepts')
       },
     },

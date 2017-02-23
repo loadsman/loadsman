@@ -15,23 +15,25 @@
             </div>
         </div>
 
-        <div class="card" style="position: static">
-            <div class="columns is-gapless">
-                <div class="column" style="flex: 1 0 350px; width: 350px">
-                    <vm-precept-list @selected="setCurrentPrecept($event)"
-                    ></vm-precept-list>
+            <div class="columns is-gapless is-mobile">
+                <div class="column" style="flex: 1 0 350px; width: 350px;">
+                    <div class="card">
+                        <vm-precept-list @selected="setCurrentPrecept($event)"
+                        ></vm-precept-list>
+                    </div>
                 </div>
                 <div class="column"
-                     style="flex: 1 1 100%"
+                     style="flex: 1 1 100%; padding-left: 10px"
                      v-if="preceptWorker.currentPrecept"
                 >
-                    <vm-precept-edit :precept="preceptWorker.currentPrecept"
-                                     @updated="updated($event)"
-                                     @removed="remove($event)"
-                    ></vm-precept-edit>
+                    <div class="card">
+                        <vm-precept-edit :precept="preceptWorker.currentPrecept"
+                                         @updated="updated($event)"
+                                         @removed="remove($event)"
+                        ></vm-precept-edit>
+                    </div>
                 </div>
             </div>
-        </div>
     </div>
 </template>
 

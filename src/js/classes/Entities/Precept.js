@@ -18,7 +18,7 @@ import HeaderCollection from '../Modules/Header/HeaderCollection.js'
 class Precept {
   constructor() {
     this._id = uniqid()
-    this.body = '{}'
+    this.body = {}
     this.uri = '/'
     this.name = ''
     this.method = 'GET'

@@ -48,10 +48,11 @@
             line-height: $lineHeight;
             display: inline-block;
             align-items: center;
-            width: calc(100% - 60px);
             white-space: nowrap;
             text-overflow: ellipsis;
+            z-index: 10;
             &:not(:hover) {
+                width: calc(100% - 60px);
                 overflow: hidden;
             }
         }

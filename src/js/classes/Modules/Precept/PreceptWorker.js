@@ -2,17 +2,19 @@ import Project from '../../Entities/Project.js'
 import Precept from '../../Entities/Precept.js'
 import ObserverSpawner from '../../Ajax/ObserverSpawner.js'
 
+import Header from '../../Entities/Header.js'
 import PreceptCollection from './PreceptCollection.js'
+import HeaderCollection from '../Header/HeaderCollection.js'
 
 class PreceptWorker {
-  constructor(){
+  constructor() {
     this.currentProject = null
     this.currentPrecept = null
     this.preceptCollection = new PreceptCollection()
     this.preceptObserver = new ObserverSpawner().getPreceptObserver()
   }
 
-  getStorageKey(){
+  getStorageKey() {
     return 'precepts_' + this.currentProject._id
   }
 
@@ -20,8 +22,10 @@ class PreceptWorker {
     this.preceptObserver.send({method: 'get', data: this.getStorageKey()})
         .then((precepts) => {
           precepts = precepts ? precepts : []
-          return precepts.map((precept) => {
-            return Object.assign(new Precept(), precept)
+          return precepts.map((rawPrecept) => {
+            let precept : Precept = Object.assign(new Precept(), rawPrecept)
+            precept.setHeaders(this._mapHeaders(rawPrecept.headers))
+            return precept
           })
         })
         .then((precepts: Array<Precept>) => {
@@ -29,18 +33,25 @@ class PreceptWorker {
         })
   }
 
-  addPrecept(precept: Precept){
+  _mapHeaders(headers: Array){
+    headers = headers.map((rawHeader) => {
+      let header = Object.assign(new Header(), rawHeader)
+    })
+    return new HeaderCollection(headers)
+  }
+
+  addPrecept(precept: Precept) {
     this.preceptCollection.precepts.push(precept)
     this.saveAllPrecepts()
   }
 
-  removePrecept(precept: Precept){
+  removePrecept(precept: Precept) {
     let index = this.preceptCollection.precepts.indexOf(precept)
     this.preceptCollection.precepts.splice(index, 1)
     this.saveAllPrecepts()
   }
 
-  saveAllPrecepts(){
+  saveAllPrecepts() {
     let payload = {}
     payload[this.getStorageKey()] = this.preceptCollection.precepts
 

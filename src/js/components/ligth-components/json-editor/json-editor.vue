@@ -1,51 +1,54 @@
 <template>
-    <div class="json-editor"></div>
+    <div>
+        <div class="json-editor"></div>
+        <pre>{{value}}</pre>
+        <div class="notification is-danger" v-if="isError">
+            Error
+        </div>
+    </div>
 </template>
 
 <script>
   import jsoneditor from 'jsoneditor/dist/jsoneditor'
 
   export default {
-    editor: null, // Json editor instance is bound to component.
-    props: {
-      json: {}
-    },
+    props: ['value'],
     data () {
       return {
-        // We have to keep state in order to figure out,
-        // whether json change derived from parent or self.
-        editedJson: {},
-      }
-    },
-    methods: {
-      initEditor(el, options, json){
-        this.$options.editor = new jsoneditor(el, options, json)
+        editedJson: null,
+        jsoneditor: null,
+        isError: false,
       }
     },
     watch: {
-      json (json){
-        // External change
-        if (this.editedJson !== json) {
-          this.$options.editor.set(json)
-          this.editedJson = json
-        }
-      }
+      value: 'refreshFromParent',
     },
     mounted() {
-      this.editedJson = this.json
-
       let options = {
         mode: 'code',
         onChange: () => {
           try {
-            this.editedJson = this.$options.editor.get()
-            this.$emit('changed', this.editedJson)
+            this.editedJson = this.jsoneditor.get()
+            this.$emit('input', this.editedJson)
+            this.isError = false
           } catch (e) {
+            this.isError = true
           }
         },
       }
 
-      this.initEditor(this.$el, options, this.editedJson)
+      this.editedJson = this.value
+      this.jsoneditor = new jsoneditor(this.$el.children[0], options, this.value)
+    },
+    methods: {
+      refreshFromParent(){
+        console.log(this.editedJson)
+        console.log(this.value)
+        if (this.editedJson !== this.value){
+          this.jsoneditor.set(this.value)
+          this.editedJson = this.value
+        }
+      },
     },
   }
 </script>

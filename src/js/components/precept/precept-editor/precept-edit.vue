@@ -1,43 +1,38 @@
 <template>
     <div class="request-editor">
-        <div class="card is-fullwidth is-marginless">
-            <header class="card-header">
-                <p class="card-header-title">
-                    <input class="input is-expanded is-fullwidth"
-                           type="text"
-                           placeholder="Name"
-                           title="Title"
-                           v-model="editedPrecept.name"
-                    >
+        <div class="is-flex">
+            <div style="flex: 0 0 70px" class="is-flex-centered">URL</div>
+            <input style="flex: 1 1 0"
+                   class="input is-minimal"
+                   type="text"
+                   placeholder="Name"
+                   title="Title"
+                   v-model="editedPrecept.name"
+            >
+        </div>
+        <div class="is-flex" style="width: 100%">
+            <div style="flex: 0 0 70px" class="is-flex-centered">Name</div>
+            <input style="flex: 1 1"
+                   class="input is-minimal"
+                   type="text"
+                   placeholder="Name"
+                   title="Title"
+                   v-model="editedPrecept.uri"
+            >
+        </div>
 
-                    <input class="input is-expanded is-fullwidth"
-                           type="text"
-                           placeholder="Name"
-                           title="Title"
-                           v-model="editedPrecept.uri"
-                    >
-                </p>
-            </header>
-            <div class="button is-delete"
-                 @click="$emit('removed', precept)"
-            >Delete</div>
-            <div class="button is-save"
-                 @click="save"
-            >Save</div>
+        <vm-navigation-tabs
+                class="is-marginless"
+                :pages="['data', 'headers']"
+                v-model="mode"
+        ></vm-navigation-tabs>
 
-            <div style="padding: 10px">
-                <vm-navigation-tabs
-                        class="is-boxed"
-                        :pages="['data', 'headers']"
-                        v-model="mode"
-                ></vm-navigation-tabs>
-            </div>
-
+        <!-- Navigated section -->
+        <div>
             <!-- Editor -->
             <div v-if="mode === 'data'">
-                <vm-json-editor :json="editedPrecept.body"
+                <vm-json-editor v-model="editedPrecept.body"
                                 style="height: 300px"
-                                @changed="editedPrecept.body = $event, changed = true"
                 ></vm-json-editor>
             </div>
 
@@ -46,9 +41,23 @@
                 <vm-headers v-model="editedPrecept.headers"
                 ></vm-headers>
             </div>
-
-            <pre>{{precept}}</pre>
         </div>
+
+
+        <div class="button is-delete"
+             @click="$emit('removed', precept)"
+        >
+            Delete
+        </div>
+
+        <div class="button is-save"
+             @click="save"
+        >
+            Save
+        </div>
+
+        <!--<pre>{{precept}}</pre>-->
+    </div>
     </div>
 </template>
 
