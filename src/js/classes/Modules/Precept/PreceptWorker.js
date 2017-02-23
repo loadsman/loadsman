@@ -24,7 +24,7 @@ class PreceptWorker {
           precepts = precepts ? precepts : []
           return precepts.map((rawPrecept) => {
             let precept : Precept = Object.assign(new Precept(), rawPrecept)
-            precept.setHeaders(this._mapHeaders(rawPrecept.headers))
+            precept.setHeaders(this._mapHeaders(rawPrecept.headers.items))
             return precept
           })
         })
@@ -34,8 +34,9 @@ class PreceptWorker {
   }
 
   _mapHeaders(headers: Array){
+    console.log(headers)
     headers = headers.map((rawHeader) => {
-      let header = Object.assign(new Header(), rawHeader)
+      return Object.assign(new Header(), rawHeader)
     })
     return new HeaderCollection(headers)
   }

@@ -1,14 +1,18 @@
 <template>
     <div class="rule-explorer page">
         <div class="card">
-            <div class="card-header-title">
-                <span>PRECEPTS</span>&nbsp;<span style="color: darkgray">(requests)</span>
+            <div class="is-flex" style="height: 42px">
+                <div class="is-flex-centered" style="padding: 0 10px">
+                    <span style="font-weight: 700">PRECEPTS</span>
+                    &nbsp;
+                    <span style="color: darkgray">(requests)</span>
+                </div>
                 <div class="flex-divider"></div>
-                <div class="button is-create is-small"
-                     style="font-weight: normal"
+                <div class="large-button is-flex-centered has-create-color"
+                     style="width: 42px; height: 42px;"
                      @click="createPrecept"
                 >
-                    <span class="icon is-small">
+                    <span class="icon">
                         <i class="fa fa-plus"></i>
                     </span>
                 </div>
@@ -19,6 +23,7 @@
                 <div class="column" style="flex: 1 0 350px; width: 350px;">
                     <div class="card">
                         <vm-precept-list @selected="setCurrentPrecept($event)"
+                                         @create="createPrecept"
                         ></vm-precept-list>
                     </div>
                 </div>

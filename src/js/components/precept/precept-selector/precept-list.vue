@@ -18,7 +18,7 @@
              class="notification"
              transition="fade-in"
         >
-            No requests found. <a>Create new</a>.
+            No precepts found. <a @click="$emit('create')">Create new</a>.
         </div>
     </div>
 </template>

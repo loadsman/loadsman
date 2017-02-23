@@ -1,23 +1,21 @@
 <template>
     <div class="request-editor">
         <div class="is-flex">
-            <div style="flex: 0 0 70px" class="is-flex-centered">URL</div>
-            <input style="flex: 1 1 0"
-                   class="input is-minimal"
-                   type="text"
-                   placeholder="Name"
-                   title="Title"
-                   v-model="editedPrecept.name"
-            >
-        </div>
-        <div class="is-flex" style="width: 100%">
-            <div style="flex: 0 0 70px" class="is-flex-centered">Name</div>
-            <input style="flex: 1 1"
-                   class="input is-minimal"
+            <div class="request-editor__form-label">URL</div>
+            <input class="input is-minimal"
                    type="text"
                    placeholder="Name"
                    title="Title"
                    v-model="editedPrecept.uri"
+            >
+        </div>
+        <div class="is-flex" style="width: 100%">
+            <div class="request-editor__form-label">Name</div>
+            <input class="input is-minimal"
+                   type="text"
+                   placeholder="Name"
+                   title="Title"
+                   v-model="editedPrecept.name"
             >
         </div>
 
@@ -32,7 +30,7 @@
             <!-- Editor -->
             <div v-if="mode === 'data'">
                 <vm-json-editor v-model="editedPrecept.body"
-                                style="height: 300px"
+                                style="height: 400px"
                 ></vm-json-editor>
             </div>
 
@@ -43,21 +41,21 @@
             </div>
         </div>
 
-
-        <div class="button is-delete"
-             @click="$emit('removed', precept)"
-        >
-            Delete
+        <div class="is-flex">
+            <div class="large-button has-save-color"
+                 style="width: 42px; height: 42px;"
+                 @click="save"
+            >
+                <span class="icon"><i class="fa fa-save"></i></span>
+            </div>
+            <div class="flex-divider"></div>
+            <div class="large-button has-remove-color"
+                 style="width: 42px; height: 42px;"
+                 @click="$emit('removed', precept)"
+            >
+                <span class="icon"><i class="fa fa-times"></i></span>
+            </div>
         </div>
-
-        <div class="button is-save"
-             @click="save"
-        >
-            Save
-        </div>
-
-        <!--<pre>{{precept}}</pre>-->
-    </div>
     </div>
 </template>
 
@@ -107,8 +105,14 @@
   }
 </script>
 
-<style scoped>
-    .request-editor {
+<style lang="scss" rel="stylesheet/scss">
+    @import "~local-styles";
 
+    .request-editor {
+        &__form-label {
+            flex: 0 0 70px;
+            background-color: #ebebeb;
+            @include flex-center();
+        }
     }
 </style>
