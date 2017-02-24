@@ -2,6 +2,8 @@ Hi, Loadsman here.
 
 ## What do we have ATM?
 
+[![Join the chat at https://gitter.im/loadsman-chat/Lobby](https://badges.gitter.im/loadsman-chat/Lobby.svg)](https://gitter.im/loadsman-chat/Lobby?utm_source=badge&utm_medium=badge&utm_campaign=pr-badge&utm_content=badge)
+
 1. Webpack 2 build with hot reload.
 2. Chrome extension.
 3. Endless hope.
