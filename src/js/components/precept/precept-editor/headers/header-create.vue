@@ -1,30 +1,27 @@
 <template>
-    <div class="precept-header-create">
-        <p class="control has-addons">
-            <input class="input is-expanded"
-                   type="text"
-                   placeholder="Key"
-                   title="Key"
-                   @click.prevent="$emit('click', {field: 'key'})"
-            >
-            <input class="input is-expanded"
-                   type="text"
-                   placeholder="Value"
-                   title="Value"
-                   @click.prevent="$emit('click', {field: 'value'})"
-            >
-        </p>
+    <div class="precept-header-create is-flex">
+        <input class="input is-minimal"
+               placeholder="Key"
+               title="Key"
+               @click.prevent="$emit('click', {field: 'key'})"
+        >
+        <input class="input is-minimal"
+               placeholder="Value"
+               title="Value"
+               @click.prevent="$emit('click', {field: 'value'})"
+        >
+        <div class="large-button is-inverted square-32"
+             @click="$emit('remove')"
+        ></div>
     </div>
 </template>
 
 <script>
-    export default {
-
-    }
+  export default {}
 </script>
 
 <style style="scss" rel="stylesheet/scss">
     .precept-header-create {
-        padding: 0 43px 10px 10px;
+
     }
 </style>

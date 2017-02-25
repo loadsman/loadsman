@@ -5,7 +5,7 @@
             {{precept.method}}
         </div>
         <div class="rule__text-block ">
-            <span class="rule__text">{{precept.uri}}</span>
+            <span class="rule__text">{{precept.url}}</span>
         </div>
     </div>
 </template>

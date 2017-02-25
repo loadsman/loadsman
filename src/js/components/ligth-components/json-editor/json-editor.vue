@@ -1,28 +1,10 @@
 <template>
     <div class="json-editor">
-        <div class="json-editor__bind" style="height: 400px;"></div> <!-- Here goes binding -->
-        <div class="json-editor__button-block">
-            <div class="button is-small"
-                 @click="jsoneditor.format()"
-                 title="Format"
-            >
-            <span class="icon is-small">
-                <i class="fa fa-indent"></i>
-            </span>
-            </div>
-            <br>
-            <div class="button is-small"
-                 @click="jsoneditor.compact()"
-                 title="Compact"
-            >
-            <span class="icon is-small">
-                <i class="fa fa-align-justify"></i>
-            </span>
-            </div>
-        </div>
-        <div class="notification is-danger" v-if="isError">
-            Error
-        </div>
+        <div class="json-editor__bind" style="height: 400px;"></div>
+        <!-- Here goes binding -->
+        <div class="json-editor__notification-border"
+             v-if="isError"
+        ></div>
     </div>
 </template>
 
@@ -36,7 +18,7 @@
     data () {
       return {
         editedJson: null,
-        jsoneditor: null,
+        editor: null,
         isError: false,
       }
     },
@@ -44,101 +26,96 @@
       value: 'refreshFromParent',
     },
     mounted() {
-      let options = {
-        ace,
-        mode: 'code',
-        onChange: () => {
+      this.mountEditor()
+
+
+//        onChange: () => {
+//          try {
+//            this.editedJson = this.jsoneditor.get()
+//            this.$emit('input', this.editedJson)
+//            this.isError = false
+//          } catch (e) {
+//            this.isError = true
+//          }
+//        },
+    },
+    methods: {
+      mountEditor (){
+        let editor = this.editor = ace.edit(this.$el.children[0])
+        let session = editor.getSession()
+        session.setTabSize(2)
+        session.setUseWrapMode(true)
+        session.setMode('ace/mode/json')
+
+        editor.commands.addCommand({
+          name: 'format',
+          bindKey: {win: "Ctrl+Alt+L", mac: "Command+Alt+L"},
+          exec: () => {
+            this.format()
+          }
+        })
+        editor.commands.addCommand({
+          name: 'format',
+          bindKey: {win: "Ctrl+Enter", mac: "Command+Enter"},
+          exec: () => {
+            this.$emit('send')
+          }
+        })
+        editor.$blockScrolling = Infinity
+        editor.on('input', (e) => {
+          if (this.isClean()){
+            return;
+          }
+
           try {
-            this.editedJson = this.jsoneditor.get()
+            this.editedJson = JSON.parse(editor.getValue())
             this.$emit('input', this.editedJson)
             this.isError = false
           } catch (e) {
             this.isError = true
           }
-        },
-      }
+        })
 
-      this.editedJson = this.value
-      this.jsoneditor = new jsoneditor(this.$el.children[0], options, this.value)
-    },
-    methods: {
-      getAceInstance (){
-
+        this.refreshFromParent()
       },
       refreshFromParent(){
         if (this.editedJson !== this.value) {
-          this.jsoneditor.set(this.value)
+          this.editor.setValue(JSON.stringify(this.value, null, '\t'))
           this.editedJson = this.value
+          setTimeout(() => {
+            this.markClean()
+          })
         }
       },
+      isClean(){
+        return this.editor.session.getUndoManager().isClean()
+      },
+      markClean(){
+        this.editor.session.getUndoManager().markClean()
+      },
+      format(){
+        try {
+          let data = JSON.parse(this.editor.getValue())
+          this.editor.setValue(JSON.stringify(data, null, '\t'))
+        } catch (e) {
+        }
+      }
     },
   }
 </script>
 
 <style lang="scss" rel="stylesheet/scss">
-    @import "~jsoneditor/dist/jsoneditor.css";
     @import "~local-styles";
 
     .json-editor {
         position: relative;
-
-        .json-editor__button-block {
+        .json-editor__notification-border {
             position: absolute;
+            background-color: $red;
+            height: 100%;
+            width: 3px;
+            z-index: 5;
             top: 0;
-            left: 0;
-            z-index: 8;
-            .button {
-                opacity: .5;
-                background-color: transparent;
-                &:hover {
-                    background-color: white;
-                    opacity: 1;
-                    border: none;
-                }
-            }
-        }
-
-        .jsoneditor {
-            border: none;
-            .ace_editor {
-                &.ace_focus {
-                    // border-color: $primary;
-                }
-            }
-            .ace_marker-layer {
-                .ace_active-line {
-                    // background-color: lighten($primary, 40%);
-                }
-            }
-            .jsoneditor-menu {
-                background-color: $primary;
-                border-bottom-color: transparent;
-                .jsoneditor-frame {
-                    padding: 0;
-                    background-color: #0092a2;
-                    input {
-                        color: #c6faff;
-                        line-height: 1.7;
-                        margin: 0;
-                        &:focus {
-                            color: $black;
-                            background-color: $white;
-                        }
-                    }
-                }
-                .jsoneditor-poweredBy {
-                    color: $white;
-                }
-                button {
-                    border-radius: 0;
-                    // background-color: $primary;
-                    margin: 0;
-                    &:hover, &:active, &:focus {
-                        // background-color: darken($primary, 10%);
-                        outline: 0;
-                    }
-                }
-            }
         }
     }
 </style>

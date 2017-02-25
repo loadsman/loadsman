@@ -3,6 +3,7 @@ import AjaxOptions from './AjaxOptions'
 
 class FetchAdapter extends AbstractAdapter {
   send(options: AjaxOptions): Promise {
+    console.log(options)
     let input = options.getFullUrl()
     let init = {
       method: options.method,

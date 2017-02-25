@@ -19,7 +19,7 @@ class Precept {
   constructor() {
     this._id = uniqid()
     this.body = {}
-    this.uri = '/'
+    this.url = '/'
     this.name = ''
     this.method = 'GET'
     this.setHeaders(new HeaderCollection([]))

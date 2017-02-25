@@ -15,6 +15,7 @@
     "babel-plugin-transform-flow-strip-types": "^6.22.0",
     "babel-preset-es2015": "^6.22.0",
     "babel-preset-stage-2": "^6.22.0",
+    "brace": "https://registry.npmjs.org/brace/-/brace-0.8.0.tgz",
     "bulma": "^0.3.1",
     "chalk": "^1.1.3",
     "clean-webpack-plugin": "^0.1.15",

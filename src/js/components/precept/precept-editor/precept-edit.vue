@@ -6,7 +6,7 @@
                    type="text"
                    placeholder="Name"
                    title="Title"
-                   v-model="editedPrecept.uri"
+                   v-model="editedPrecept.url"
             >
         </div>
         <div class="is-flex" style="width: 100%">
@@ -19,6 +19,8 @@
             >
         </div>
 
+       <div style="height: 20px; background-color: #ebebeb"></div>
+
         <vm-navigation-tabs
                 class="is-marginless"
                 :pages="['data', 'headers']"
@@ -30,7 +32,7 @@
             <!-- Editor -->
             <div v-if="mode === 'data'">
                 <vm-json-editor v-model="editedPrecept.body"
-                                style="height: 400px"
+                                @send="send"
                 ></vm-json-editor>
             </div>
 
@@ -41,17 +43,25 @@
             </div>
         </div>
 
+        <div style="height: 20px; background-color: #ebebeb"></div>
+
         <div class="is-flex">
-            <div class="large-button has-save-color"
-                 style="width: 32px; height: 32px;"
+            <div class="large-button has-save-color square-32"
                  @click="save"
+                 title="Save precept"
             >
                 <span class="icon"><i class="fa fa-save"></i></span>
             </div>
+            <div class="large-button has-save-color square-32"
+                 @click="send"
+                 title="Send request from precept (Ctrl+Enter)"
+            >
+                <span class="icon"><i class="fa fa-send"></i></span>
+            </div>
             <div class="flex-divider"></div>
-            <div class="large-button has-remove-color"
-                 style="width: 32px; height: 32px;"
+            <div class="large-button has-remove-color square-32"
                  @click="$emit('removed', precept)"
+                 title="Delete precept"
             >
                 <span class="icon"><i class="fa fa-times"></i></span>
             </div>
@@ -63,6 +73,7 @@
   import _ from 'lodash'
 
   import preceptStorage from '../../../instances/preceptStorage.js'
+  import PreceptSender from '../../../classes/Modules/Precept/PreceptSender.js'
 
   import Precept from '../../../classes/Entities/Precept.js'
   import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
@@ -73,6 +84,7 @@
   export default {
     data () {
       return {
+        preceptSender: new PreceptSender(),
         editedPrecept: new Precept(),
         mode: 'data', // 'headers'
       }
@@ -100,6 +112,9 @@
       },
       refreshFromParent(){
         this.editedPrecept = Object.assign(new Precept(), this.precept)
+      },
+      send(){
+        this.preceptSender.send(this.editedPrecept)
       }
     },
   }
@@ -111,7 +126,6 @@
     .request-editor {
         &__form-label {
             flex: 0 0 70px;
-            background-color: #ebebeb;
             @include flex-center();
         }
     }

@@ -15,3 +15,16 @@
 .flex-divider {
   flex: 1 0;
 }
+
+@mixin square($size) {
+  .square-#{$size} {
+    width: #{$size}px;
+    height: #{$size}px;
+    flex-basis: #{$size}px;
+  }
+}
+
+@include square(16);
+@include square(32);
+@include square(42);
+

@@ -9,9 +9,17 @@ $colors: (
     background-color: $color;
   }
   .large-button.has-#{$name}-color {
+    color: $white;
     background-color: $color;
     &:hover {
       background-color: darken($color, 20%);
+    }
+    &.is-inverted {
+      color: $color;
+      background-color: $white;
+      &:hover {
+        background-color: darken($white, 10%);
+      }
     }
   }
 }
@@ -20,4 +28,5 @@ $colors: (
   color: $white;
   cursor: pointer;
   @include flex-center();
+  flex: 0 0;
 }

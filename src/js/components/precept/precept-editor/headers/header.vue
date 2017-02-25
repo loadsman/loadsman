@@ -1,28 +1,27 @@
 <template>
     <form class="precept-header" @submit.prevent="$emit('create')">
-        <p class="control has-addons">
-            <input class="input is-expanded"
+        <div class="is-flex">
+            <input class="input is-minimal"
                    name="key"
                    type="text"
                    placeholder="Key"
                    title="Key"
                    v-model="header.key"
             >
-            <input class="input is-expanded"
+            <input class="input is-minimal"
                    name="value"
                    type="text"
                    placeholder="Value"
                    title="Value"
                    v-model="header.value"
             >
-            <button class="is-hidden" type="submit"></button>
-            <a class="button is-danger is-outlined"
+            <div class="large-button has-remove-color is-inverted square-32"
                @click="$emit('remove')"
             >
-                <span class="icon is-small">
+                <span class="icon">
                   <i class="fa fa-times"></i>
                 </span>
-            </a>
+            </div>
         </p>
     </form>
 </template>
@@ -49,6 +48,5 @@
 
 <style lang="scss" rel="stylesheet/scss">
     .precept-header {
-        padding: 0 10px 10px 10px;
     }
 </style>

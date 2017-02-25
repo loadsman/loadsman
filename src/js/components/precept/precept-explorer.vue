@@ -8,8 +8,7 @@
                     <span style="color: darkgray">(requests)</span>
                 </div>
                 <div class="flex-divider"></div>
-                <div class="large-button is-flex-centered has-create-color"
-                     style="width: 42px; height: 42px;"
+                <div class="large-button has-create-color square-42"
                      @click="createPrecept"
                 >
                     <span class="icon">
