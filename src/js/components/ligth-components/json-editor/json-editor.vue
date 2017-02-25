@@ -27,6 +27,8 @@
 </template>
 
 <script>
+  import ace from './ace-editor/ace-editor'
+
   import jsoneditor from 'jsoneditor/dist/jsoneditor'
 
   export default {
@@ -43,6 +45,7 @@
     },
     mounted() {
       let options = {
+        ace,
         mode: 'code',
         onChange: () => {
           try {
@@ -59,9 +62,10 @@
       this.jsoneditor = new jsoneditor(this.$el.children[0], options, this.value)
     },
     methods: {
+      getAceInstance (){
+
+      },
       refreshFromParent(){
-        console.log(this.editedJson)
-        console.log(this.value)
         if (this.editedJson !== this.value) {
           this.jsoneditor.set(this.value)
           this.editedJson = this.value
@@ -77,7 +81,6 @@
 
     .json-editor {
         position: relative;
-        margin-bottom: -34px;
 
         .json-editor__button-block {
             position: absolute;
@@ -94,8 +97,6 @@
                 }
             }
         }
-        .json-editor__bind {
-        }
 
         .jsoneditor {
             border: none;
@@ -110,7 +111,6 @@
                 }
             }
             .jsoneditor-menu {
-                display: none;
                 background-color: $primary;
                 border-bottom-color: transparent;
                 .jsoneditor-frame {

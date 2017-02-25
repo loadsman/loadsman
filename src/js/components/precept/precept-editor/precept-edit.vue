@@ -43,14 +43,14 @@
 
         <div class="is-flex">
             <div class="large-button has-save-color"
-                 style="width: 42px; height: 42px;"
+                 style="width: 32px; height: 32px;"
                  @click="save"
             >
                 <span class="icon"><i class="fa fa-save"></i></span>
             </div>
             <div class="flex-divider"></div>
             <div class="large-button has-remove-color"
-                 style="width: 42px; height: 42px;"
+                 style="width: 32px; height: 32px;"
                  @click="$emit('removed', precept)"
             >
                 <span class="icon"><i class="fa fa-times"></i></span>
