@@ -1,25 +1,27 @@
 <template>
     <div class="request-editor">
-        <div class="is-flex">
-            <div class="request-editor__form-label">URL</div>
-            <input class="input is-minimal"
-                   type="text"
-                   placeholder="Name"
-                   title="Title"
-                   v-model="editedPrecept.url"
-            >
-        </div>
-        <div class="is-flex" style="width: 100%">
-            <div class="request-editor__form-label">Name</div>
-            <input class="input is-minimal"
-                   type="text"
-                   placeholder="Name"
-                   title="Title"
-                   v-model="editedPrecept.name"
-            >
+        <div ref="form">
+            <div class="is-flex">
+                <div class="request-editor__form-label">URL</div>
+                <input class="input is-minimal mousetrap"
+                       type="text"
+                       placeholder="Name"
+                       title="Title"
+                       v-model="editedPrecept.url"
+                >
+            </div>
+            <div class="is-flex" style="width: 100%">
+                <div class="request-editor__form-label">Name</div>
+                <input class="input is-minimal mousetrap"
+                       type="text"
+                       placeholder="Name"
+                       title="Title"
+                       v-model="editedPrecept.name"
+                >
+            </div>
         </div>
 
-       <div style="height: 20px; background-color: #ebebeb"></div>
+        <div style="height: 20px; background-color: #ebebeb"></div>
 
         <vm-navigation-tabs
                 class="is-marginless"
@@ -32,13 +34,16 @@
             <!-- Editor -->
             <div v-if="mode === 'data'">
                 <vm-json-editor v-model="editedPrecept.body"
+                                @input="isClean = false"
                                 @send="send"
+                                @save="save"
                 ></vm-json-editor>
             </div>
 
             <!-- Headers -->
             <div v-if="mode === 'headers'">
                 <vm-headers v-model="editedPrecept.headers"
+                            @input="isClean = false"
                 ></vm-headers>
             </div>
         </div>
@@ -48,7 +53,8 @@
         <div class="is-flex">
             <div class="large-button has-save-color square-32"
                  @click="save"
-                 title="Save precept"
+                 :disabled="isClean"
+                 title="Save precept (Ctrl+S)"
             >
                 <span class="icon"><i class="fa fa-save"></i></span>
             </div>
@@ -59,6 +65,12 @@
                 <span class="icon"><i class="fa fa-send"></i></span>
             </div>
             <div class="flex-divider"></div>
+            <div class="large-button has-info-color is-inverted square-32"
+                 @click="showHints = ! showHints"
+                 title="Show hints"
+            >
+                <span class="icon"><i class="fa fa-question"></i></span>
+            </div>
             <div class="large-button has-remove-color square-32"
                  @click="$emit('removed', precept)"
                  title="Delete precept"
@@ -66,36 +78,60 @@
                 <span class="icon"><i class="fa fa-times"></i></span>
             </div>
         </div>
+
+        <div v-if="showHints"
+             class="hints-block"
+             style="padding: 10px"
+        >
+            <h4>Keybinds: </h4>
+            <ul>
+                <li><strong>Ctrl+S</strong> — Save precept</li>
+                <li><strong>Ctrl+Shift+L</strong> — Format JSON</li>
+                <li><strong>Ctrl+Enter</strong> — Send request</li>
+            </ul>
+        </div>
     </div>
 </template>
 
 <script>
   import _ from 'lodash'
+  import Mousetrap from 'mousetrap'
 
   import preceptStorage from '../../../instances/preceptStorage.js'
-  import PreceptSender from '../../../classes/Modules/Precept/PreceptSender.js'
 
   import Precept from '../../../classes/Entities/Precept.js'
   import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
   import vmHeaders from './headers/headers.vue'
 
+  import vmResponseViewer from '../response-viewer/response-viewer.vue'
   import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
 
   export default {
     data () {
       return {
-        preceptSender: new PreceptSender(),
-        editedPrecept: new Precept(),
+        isClean: true,
+        showHints: false,
+
         mode: 'data', // 'headers'
+
+        mousetrap: null,
+        editedPrecept: new Precept(),
       }
     },
     components: {
       vmJsonEditor,
       vmHeaders,
       vmNavigationTabs,
+
+      vmResponseViewer,
     },
     created(){
       this.refreshFromParent()
+
+      this.bindKeys()
+    },
+    beforeDestroy(){
+      this.unbindKeys()
     },
     watch: {
       precept: 'refreshFromParent',
@@ -109,12 +145,26 @@
       save(){
         Object.assign(this.precept, this.editedPrecept)
         this.$emit('updated', this.precept)
+        this.isClean = true
+      },
+      bindKeys(){
+        let mousetrap = this.mousetrap = new Mousetrap(this.$refs.form)
+        mousetrap.bind('ctrl+s', () => {
+          this.save()
+        })
+        mousetrap.bind('ctrl+enter', () => {
+          this.send()
+        })
+      },
+      unbindKeys(){
+        this.mousetrap.reset()
       },
       refreshFromParent(){
+        this.isClean = true
         this.editedPrecept = Object.assign(new Precept(), this.precept)
       },
       send(){
-        this.preceptSender.send(this.editedPrecept)
+        this.$emit('send', this.editedPrecept)
       }
     },
   }

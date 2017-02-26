@@ -2,6 +2,7 @@ $colors: (
         create: hsl(120, 80, 65),
         save: hsl(120, 80, 65),
         remove: hsl(0, 80, 65),
+        info: hsl(240, 80, 65),
 );
 
 @each $name, $color in $colors {
@@ -29,4 +30,9 @@ $colors: (
   cursor: pointer;
   @include flex-center();
   flex: 0 0;
+  &[disabled] {
+    cursor: default;
+    opacity: .6;
+    pointer-events: none;
+  }
 }

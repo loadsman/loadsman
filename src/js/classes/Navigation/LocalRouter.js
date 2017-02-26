@@ -1,9 +1,19 @@
 export default class {
-  constructor(path: string = ''){
-    this.path = path
+  constructor(path: string = '') {
+    let storedPath = this._getFromStorage()
+    this.path = storedPath ? storedPath : path
   }
 
-  setPath(path: String):void{
+  _getFromStorage(): ?String {
+    return localStorage.getItem('loadsman-internal-path')
+  }
+
+  _saveInStorage(path: String) {
+    localStorage.setItem('loadsman-internal-path', path)
+  }
+
+  setPath(path: String): void {
     this.path = path
+    this._saveInStorage(path)
   }
 }

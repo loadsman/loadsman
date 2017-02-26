@@ -1,7 +1,7 @@
 class Header {
-  constructor() {
-    this.key = ''
-    this.value = ''
+  constructor(key = '', value = '') {
+    this.key = key
+    this.value = value
   }
 
   isEmpty(): boolean {

@@ -23,7 +23,7 @@
 </template>
 
 <script>
-    import Project from '../../../classes/Entities/Project.js'
+  import Project from '../../../classes/Entities/Project.js'
 
   import projectWorker from '../../../instances/workers/projectWorker.js'
 

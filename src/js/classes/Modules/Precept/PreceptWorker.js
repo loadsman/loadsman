@@ -54,6 +54,7 @@ class PreceptWorker {
 
   saveAllPrecepts() {
     let payload = {}
+    console.log(this.getStorageKey())
     payload[this.getStorageKey()] = this.preceptCollection.precepts
 
     this.preceptObserver.send({method: 'set', data: payload})

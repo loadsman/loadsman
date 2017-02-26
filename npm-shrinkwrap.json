@@ -3308,6 +3308,12 @@
       "resolved": "https://registry.npmjs.org/moment/-/moment-2.17.1.tgz",
       "dev": true
     },
+    "mousetrap": {
+      "version": "1.6.0",
+      "from": "mousetrap@latest",
+      "resolved": "https://registry.npmjs.org/mousetrap/-/mousetrap-1.6.0.tgz",
+      "dev": true
+    },
     "ms": {
       "version": "0.7.2",
       "from": "ms@0.7.2",

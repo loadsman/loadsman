@@ -2,7 +2,7 @@
     <div class="loadsman-app">
         <vm-navigation class="loadsman-app__navigation"></vm-navigation>
 
-        <div class="loadsman-app__main">
+        <div class="loadsman-app__main" v-if="projectWorker.currentProject">
             <vm-main-page v-if="localRouter.path === 'main-page'"
             ></vm-main-page>
             <vm-rule-explorer v-if="localRouter.path === 'rules'"
@@ -18,6 +18,7 @@
 <script>
 
   import localRouter from '../instances/localRouter.js'
+  import projectWorker from '../instances/workers/projectWorker.js'
 
   import iframeListener from '../instances/iframeListener.js'
 
@@ -29,8 +30,12 @@
   import vmProjectExplorer from './project/project-explorer.vue'
 
   export default {
+    created(){
+      projectWorker.refreshList()
+    },
     data (){
       return {
+        projectWorker,
         localRouter,
         text: 'Some text',
       }

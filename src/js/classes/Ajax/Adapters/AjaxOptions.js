@@ -1,3 +1,7 @@
+import HeaderCollection from '../../Modules/Header/HeaderCollection.js'
+
+
+
 /**
  * @class AjaxOptions
  *
@@ -6,15 +10,15 @@
  * @property baseURL {String} `baseURL` will be prepended to `url` unless `url` is absolute
  * @property interceptRequest {Array}
  * @property interceptResponse {Array}
- * @property headers {Object}
+ * @property headers {Array<HeaderCollection>}
  * @property data {any}
  * @property credentials {Boolean}
  */
 class AjaxOptions {
   constructor() {
     this.url = ''
-    this.method = 'get'
-    this.baseURL = ''
+    this.method = 'GET'
+    this.baseURL = '/'
     this.interceptRequest = []
     this.interceptResponse = []
     this.headers = {}

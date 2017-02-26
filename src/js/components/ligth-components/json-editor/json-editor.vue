@@ -14,7 +14,12 @@
   import jsoneditor from 'jsoneditor/dist/jsoneditor'
 
   export default {
-    props: ['value'],
+    props: {
+      value: {},
+      'ace-options': {
+        default: () => {return {}},
+      }
+    },
     data () {
       return {
         editedJson: null,
@@ -27,17 +32,6 @@
     },
     mounted() {
       this.mountEditor()
-
-
-//        onChange: () => {
-//          try {
-//            this.editedJson = this.jsoneditor.get()
-//            this.$emit('input', this.editedJson)
-//            this.isError = false
-//          } catch (e) {
-//            this.isError = true
-//          }
-//        },
     },
     methods: {
       mountEditor (){
@@ -55,15 +49,25 @@
           }
         })
         editor.commands.addCommand({
-          name: 'format',
+          name: 'send',
           bindKey: {win: "Ctrl+Enter", mac: "Command+Enter"},
           exec: () => {
             this.$emit('send')
           }
         })
+        editor.commands.addCommand({
+          name: 'save',
+          bindKey: {win: "Ctrl+S", mac: "Command+Shift+S"},
+          exec: () => {
+            this.$emit('save')
+          }
+        })
+
+        editor.setOptions(this.aceOptions)
+
         editor.$blockScrolling = Infinity
         editor.on('input', (e) => {
-          if (this.isClean()){
+          if (this.checkIfClean()) {
             return;
           }
 
@@ -80,14 +84,16 @@
       },
       refreshFromParent(){
         if (this.editedJson !== this.value) {
-          this.editor.setValue(JSON.stringify(this.value, null, '\t'))
+          this.editor.setValue(JSON.stringify(this.value, null, '\t'), -1)
           this.editedJson = this.value
+          // setValue seems to be queued so we need to wait a tic.
           setTimeout(() => {
+            // This is essential to prevent endless loops.
             this.markClean()
           })
         }
       },
-      isClean(){
+      checkIfClean(){
         return this.editor.session.getUndoManager().isClean()
       },
       markClean(){
@@ -108,6 +114,8 @@
     @import "~local-styles";
 
     .json-editor {
+        resize: vertical;
+        overflow:auto;
         position: relative;
         .json-editor__notification-border {
             position: absolute;
