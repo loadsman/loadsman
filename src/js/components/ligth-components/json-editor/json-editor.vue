@@ -17,7 +17,9 @@
     props: {
       value: {},
       'ace-options': {
-        default: () => {return {}},
+        default: () => {
+          return {}
+        },
       }
     },
     data () {
@@ -63,6 +65,7 @@
           }
         })
 
+        editor.setShowPrintMargin(false)
         editor.setOptions(this.aceOptions)
 
         editor.$blockScrolling = Infinity
@@ -84,11 +87,15 @@
       },
       refreshFromParent(){
         if (this.editedJson !== this.value) {
-          this.editor.setValue(JSON.stringify(this.value, null, '\t'), -1)
-          this.editedJson = this.value
+          let jsonString = JSON.stringify(this.value, null, '\t')
+          // Open braces for empty object. Being nice to user.
+          jsonString = jsonString === '{}' ? "{\n\t\n}" : jsonString
+          // -1 sets cursor at beginning.
+          this.editor.setValue(jsonString, -1)
+          this.editedJson = jsonString
           // setValue seems to be queued so we need to wait a tic.
           setTimeout(() => {
-            // This is essential to prevent endless loops.
+            // This is essential to prevent endless watch-refresh loop.
             this.markClean()
           })
         }
@@ -115,7 +122,7 @@
 
     .json-editor {
         resize: vertical;
-        overflow:auto;
+        overflow: auto;
         position: relative;
         .json-editor__notification-border {
             position: absolute;

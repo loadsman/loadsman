@@ -5,7 +5,7 @@ import $ from 'jquery'
 class FetchAdapter extends AbstractAdapter {
   send(options: AjaxOptions): Promise {
     console.log(options)
-    this.processGetOptions(options)
+    this.processOptions(options)
 
     let input = options.getFullUrl()
     let init = {
@@ -22,15 +22,36 @@ class FetchAdapter extends AbstractAdapter {
     return this._applyReponseInterceptors(promise, options)
   }
 
-  processGetOptions(options : AjaxOptions){
-    let isGet = -1 !== ['GET', 'HEAD'].indexOf(options.method)
-    if (! isGet){
-      return options
+  /**
+   * Prepare options to be sent via fetch.
+   *
+   * @param options
+   */
+  processOptions(options: AjaxOptions) {
+    if (-1 !== ['GET', 'HEAD'].indexOf(options.method)) {
+      this.processGetOptions(options)
+    } else {
+      this.processNotGetOptions(options)
     }
+  }
+
+  processGetOptions(options: AjaxOptions) {
+    // Remove body, querify and append to url.
     let body = options.body
-    let query = isGet && typeof body !== 'string' ? $.param(body): body
     delete options.body
+
+    let query = typeof body !== 'string' ? $.param(body) : body
+    if (!query) {
+      return
+    }
+
     options.url += '?' + query
+  }
+
+  processNotGetOptions(options: AjaxOptions) {
+    // Stringify body when needed.
+    let body = options.body
+    options.body = typeof body === 'string' ? body : JSON.stringify(body)
   }
 
   _applyReponseInterceptors(promise: Promise, options: AjaxOptions) {

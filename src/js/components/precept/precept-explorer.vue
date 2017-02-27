@@ -18,7 +18,7 @@
             </div>
         </div>
 
-        <div class="columns is-gapless is-mobile">
+        <div class="columns is-gapless is-mobile is-marginless">
             <div class="column" style="flex: 1 0 350px; width: 350px;">
                 <div class="card">
                     <vm-precept-list @selected="setCurrentPrecept($event)"

@@ -2,12 +2,18 @@
     <div class="request-editor">
         <div ref="form">
             <div class="is-flex">
-                <div class="request-editor__form-label">URL</div>
+                <div class="select">
+                    <vm-method-selector
+                            v-model="editedPrecept.method"
+                            @input="isClean = false"
+                    ></vm-method-selector>
+                </div>
                 <input class="input is-minimal mousetrap"
                        type="text"
                        placeholder="Name"
                        title="Title"
                        v-model="editedPrecept.url"
+                       @input="isClean = false"
                 >
             </div>
             <div class="is-flex" style="width: 100%">
@@ -17,6 +23,7 @@
                        placeholder="Name"
                        title="Title"
                        v-model="editedPrecept.name"
+                       @input="isClean = false"
                 >
             </div>
         </div>
@@ -102,6 +109,7 @@
   import Precept from '../../../classes/Entities/Precept.js'
   import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
   import vmHeaders from './headers/headers.vue'
+  import vmMethodSelector from './method-selector/method-selector.vue'
 
   import vmResponseViewer from '../response-viewer/response-viewer.vue'
   import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
@@ -121,6 +129,8 @@
     components: {
       vmJsonEditor,
       vmHeaders,
+      vmMethodSelector,
+
       vmNavigationTabs,
 
       vmResponseViewer,
@@ -151,6 +161,7 @@
         let mousetrap = this.mousetrap = new Mousetrap(this.$refs.form)
         mousetrap.bind('ctrl+s', () => {
           this.save()
+          return false // prevent bubbling
         })
         mousetrap.bind('ctrl+enter', () => {
           this.send()

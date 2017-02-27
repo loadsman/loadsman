@@ -15,7 +15,7 @@
                             v-if="response.type === 'json'"
                             :ace-options="{readOnly: true}"
             ></vm-json-editor>
-            <iframe class="response-viewer__iframe" :class="{'is-visible': response.type === 'text'}"
+            <iframe class="response-viewer__iframe is-marginless is-paddingless" :class="{'is-visible': response.type === 'text'}"
                     :srcdoc="response.body"
             ></iframe>
         </div>
@@ -25,6 +25,7 @@
 <script>
   import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
   import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
+  import Response from '../../../classes/Entities/Response.js'
 
   export default {
     data () {
@@ -32,7 +33,11 @@
         mode: 'preview', // 'raw'
       }
     },
-    props: ['response'],
+    props: {
+      response: {
+        type: Response
+      }
+    },
     components: {
       vmNavigationTabs,
       vmJsonEditor,

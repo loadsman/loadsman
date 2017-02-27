@@ -31,6 +31,15 @@ class Precept {
     this.method = method
   }
 
+  static get methodsList(): Array {
+    return [
+        'GET',
+        'POST',
+        'PUT',
+        'DELETE',
+    ]
+  }
+
   setHeaders(headers: HeaderCollection) {
     this.headers = headers
   }
