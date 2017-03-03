@@ -18,7 +18,8 @@
     },
     computed: {
       method(){
-        return this.rule.methods[0]
+        let method = this.rule.methods[0]
+        return method ? method : 'GET'
       }
     },
     props: ['rule'],

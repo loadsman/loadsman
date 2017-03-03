@@ -24,6 +24,7 @@
                        title="Title"
                        v-model="editedPrecept.name"
                        @input="isClean = false"
+
                 >
             </div>
         </div>

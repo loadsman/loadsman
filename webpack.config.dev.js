@@ -71,7 +71,7 @@ module.exports = {
     proxy: [
       {
         context: ['/loadsman/**', '/api/**'],
-        target: 'http://pr22.local',
+        target: 'http://pr28.local',
         changeOrigin: true,
         secure: false,
         cookieDomainRewrite: '',
