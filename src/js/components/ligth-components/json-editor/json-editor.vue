@@ -67,6 +67,7 @@
 
         editor.setShowPrintMargin(false)
         editor.setOptions(this.aceOptions)
+        editor.session.setOptions({ tabSize: 2, useSoftTabs: true })
 
         editor.$blockScrolling = Infinity
         editor.on('input', (e) => {
@@ -87,9 +88,9 @@
       },
       refreshFromParent(){
         if (this.editedJson !== this.value) {
-          let jsonString = JSON.stringify(this.value, null, '\t')
+          let jsonString = JSON.stringify(this.value, null, '  ')
           // Open braces for empty object. Being nice to user.
-          jsonString = jsonString === '{}' ? "{\n\t\n}" : jsonString
+          jsonString = jsonString === '{}' ? "{\n  \n}" : jsonString
           // -1 sets cursor at beginning.
           this.editor.setValue(jsonString, -1)
           this.editedJson = jsonString
@@ -109,7 +110,7 @@
       format(){
         try {
           let data = JSON.parse(this.editor.getValue())
-          this.editor.setValue(JSON.stringify(data, null, '\t'))
+          this.editor.setValue(JSON.stringify(data, null, '  '))
         } catch (e) {
         }
       }

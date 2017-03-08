@@ -4,54 +4,38 @@ import $ from 'jquery'
 
 class FetchAdapter extends AbstractAdapter {
   send(options: AjaxOptions): Promise {
-    console.log(options)
-    this.processOptions(options)
-
-    let input = options.getFullUrl()
     let init = {
       method: options.method,
-      headers: options.headers, // TODO Support headers
-      body: options.body,
-      credentials: options.credentials,
+      headers: options.headers.toObject(), // TODO Support headers
+      body: this.getData(options),
+      credentials: options.credentials ? 'include' : false,
     }
+    console.log(options)
 
-    console.log(input)
-    console.log(init)
-    let promise = fetch(input, init)
+    let promise = fetch(this.getInput(options), init)
 
     return this._applyReponseInterceptors(promise, options)
   }
 
-  /**
-   * Prepare options to be sent via fetch.
-   *
-   * @param options
-   */
-  processOptions(options: AjaxOptions) {
-    if (-1 !== ['GET', 'HEAD'].indexOf(options.method)) {
-      this.processGetOptions(options)
-    } else {
-      this.processNotGetOptions(options)
+  getInput(options: AjaxOptions) {
+    let url = options.getFullUrl()
+    // Append data as query for get request.
+    if (options.methodIsGet()) {
+      let body = options.data
+      let query = typeof body !== 'string' ? $.param(body) : body
+      if (query) {
+        url += '?' + query
+      }
     }
+    return url
   }
 
-  processGetOptions(options: AjaxOptions) {
-    // Remove body, querify and append to url.
-    let body = options.body
-    delete options.body
-
-    let query = typeof body !== 'string' ? $.param(body) : body
-    if (!query) {
-      return
+  getData(options: AjaxOptions) {
+    if (options.methodIsGet()) {
+      return null
     }
-
-    options.url += '?' + query
-  }
-
-  processNotGetOptions(options: AjaxOptions) {
-    // Stringify body when needed.
-    let body = options.body
-    options.body = typeof body === 'string' ? body : JSON.stringify(body)
+    let body = options.data
+    return typeof body === 'string' ? body : JSON.stringify(body)
   }
 
   _applyReponseInterceptors(promise: Promise, options: AjaxOptions) {

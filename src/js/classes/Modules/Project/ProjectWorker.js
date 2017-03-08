@@ -13,7 +13,7 @@ export default class ProjectWorker {
 
   refreshList() {
     this.projectObserver.send({method: 'get', data: 'projects'})
-        .then((projects: Array) => {
+        .then((projects: ?Array = []) => {
           return projects.map((project) => {
             return Object.assign(new Project(), project)
           })
@@ -40,9 +40,21 @@ export default class ProjectWorker {
   refreshCurrentProject() {
     let currentHost = window.top.location.host
 
-    this.currentProject = this.projectCollection.projects.find((project: Project) => {
-      return currentHost === project.host
-    })
+    let fittingProject =  this.projectCollection.projects
+                              .find((project: Project) => {
+                                return currentHost === project.host
+                              })
+
+    this.currentProject = fittingProject || this.createFittingProject(currentHost)
+  }
+
+  /**
+   * Create project with config appropriate for current domain.
+   */
+  createFittingProject(host){
+    let project = new Project(host)
+    this.saveProject(project)
+    return project
   }
 
   loadCurrentProjectPrecepts() {

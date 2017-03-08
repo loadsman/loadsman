@@ -42,6 +42,7 @@
             <!-- Editor -->
             <div v-if="mode === 'data'">
                 <vm-json-editor v-model="editedPrecept.body"
+                                :ace-options="{}"
                                 @input="isClean = false"
                                 @send="send"
                                 @save="save"

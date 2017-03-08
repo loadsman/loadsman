@@ -1,7 +1,5 @@
 import HeaderCollection from '../../Modules/Header/HeaderCollection.js'
 
-
-
 /**
  * @class AjaxOptions
  *
@@ -28,6 +26,10 @@ class AjaxOptions {
 
   getFullUrl(){
     return this.baseURL + this.url
+  }
+
+  methodIsGet(){
+    return -1 !== ['GET', 'HEAD'].indexOf(this.method)
   }
 }
 

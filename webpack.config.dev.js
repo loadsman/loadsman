@@ -71,12 +71,12 @@ module.exports = {
     proxy: [
       {
         context: ['/loadsman/**', '/api/**'],
-        target: 'http://pr28.local',
+        target: 'http://utility.pr4.local',
         changeOrigin: true,
         secure: false,
         cookieDomainRewrite: '',
         onProxyReq: function (request, req, res) {
-          request.setHeader('origin', 'http://pr22.local')
+          request.setHeader('origin', 'http://utility.pr4.local')
         }
       }
     ]

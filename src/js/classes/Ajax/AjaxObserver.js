@@ -38,12 +38,14 @@ export default class AjaxObserver {
     }
   }
 
-  send(options: Object | String) {
-    let optionsTmp = typeof options === 'string' ? {url: options} : options
-    optionsTmp = Object.assign(new AjaxOptions(), this._options, optionsTmp)
+  send(options: AjaxOptions | Object | String) {
+    if (! (options instanceof AjaxOptions)){
+      let optionsTmp = typeof options === 'string' ? {url: options} : options
+      options = Object.assign(new AjaxOptions(), this._options, optionsTmp)
+    }
 
     this._startLoading()
-    let promise = this._send(optionsTmp)
+    let promise = this._send(options)
     promise.then(() => {
       this._finishLoading(true)
     })

@@ -11,7 +11,7 @@ import HeaderCollection from '../Modules/Header/HeaderCollection.js'
  * @property uri {String}
  * @property name {Number}
  * @property method {String}
- * @property headers {String}
+ * @property headers {Array<HeaderCollection>}
  * @property createdAt {integer}
  * @property updatedAt {integer}
  */
@@ -22,7 +22,9 @@ class Precept {
     this.url = '/'
     this.name = ''
     this.method = 'GET'
-    this.setHeaders(new HeaderCollection([]))
+    this.handleXSRF = true
+    this.credentials = true
+    this.headers = new HeaderCollection([])
     this.createdAt = moment().unix()
     this.updatedAt = moment().unix()
   }
