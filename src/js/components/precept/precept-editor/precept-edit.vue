@@ -8,13 +8,14 @@
                             @input="isClean = false"
                     ></vm-method-selector>
                 </div>
-                <input class="input is-minimal mousetrap"
-                       type="text"
-                       placeholder="Name"
-                       title="Title"
-                       v-model="editedPrecept.url"
-                       @input="isClean = false"
-                >
+                <vm-type-ahead
+                        style="flex: 1 1 100%"
+                        v-model="editedPrecept.url"
+                        placeholder="Name"
+                        @input="isClean = false"
+                        track-by="uri"
+                        :options="ruleWorker.ruleCollection.rules"
+                ></vm-type-ahead>
             </div>
             <div class="is-flex" style="width: 100%">
                 <div class="request-editor__form-label">Name</div>
@@ -24,7 +25,6 @@
                        title="Title"
                        v-model="editedPrecept.name"
                        @input="isClean = false"
-
                 >
             </div>
         </div>
@@ -107,14 +107,17 @@
   import Mousetrap from 'mousetrap'
 
   import preceptStorage from '../../../instances/preceptStorage.js'
+  import ruleWorker from '../../../instances/workers/ruleWorker.js'
 
   import Precept from '../../../classes/Entities/Precept.js'
-  import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
-  import vmHeaders from './headers/headers.vue'
-  import vmMethodSelector from './method-selector/method-selector.vue'
 
+  import vmHeaders from './headers/headers.vue'
   import vmResponseViewer from '../response-viewer/response-viewer.vue'
+
+  import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
+  import vmMethodSelector from './method-selector/method-selector.vue'
   import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
+  import vmTypeAhead from '../../ligth-components/full-type-ahead.vue'
 
   export default {
     data () {
@@ -126,16 +129,17 @@
 
         mousetrap: null,
         editedPrecept: new Precept(),
+        ruleWorker,
       }
     },
     components: {
-      vmJsonEditor,
       vmHeaders,
-      vmMethodSelector,
-
-      vmNavigationTabs,
-
       vmResponseViewer,
+
+      vmJsonEditor,
+      vmMethodSelector,
+      vmNavigationTabs,
+      vmTypeAhead,
     },
     created(){
       this.refreshFromParent()

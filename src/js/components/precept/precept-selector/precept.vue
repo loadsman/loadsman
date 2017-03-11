@@ -18,9 +18,6 @@
       displayedName (){
         return this.precept.name ? this.precept.name : this.precept.path
       },
-      currentRequest(){
-
-      },
     },
     props: ['precept'],
     methods: {

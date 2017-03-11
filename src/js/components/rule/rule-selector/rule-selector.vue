@@ -45,7 +45,6 @@
   import ruleWorker from '../../../instances/workers/ruleWorker.js'
 
   import vmRule from './rule.vue'
-  //    import vmSearchPanel from  '../search/search-panel.vue'
 
   export default {
     data () {

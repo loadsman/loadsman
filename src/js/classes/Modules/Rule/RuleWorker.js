@@ -6,6 +6,7 @@ export default class RuleWorker {
   constructor(){
     this.ruleCollection = new RuleCollection()
     this.ruleObserver = new ObserverSpawner().getRuleObserver()
+    this.refreshList()
   }
 
   refreshList(){
