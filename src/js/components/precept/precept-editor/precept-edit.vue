@@ -8,25 +8,21 @@
                             @input="isClean = false"
                     ></vm-method-selector>
                 </div>
-                <vm-type-ahead
+                <vm-rule-type-ahead
                         style="flex: 1 1 100%"
                         v-model="editedPrecept.url"
-                        placeholder="Name"
                         @input="isClean = false"
-                        track-by="uri"
                         :options="ruleWorker.ruleCollection.rules"
-                ></vm-type-ahead>
+                ></vm-rule-type-ahead>
             </div>
-            <div class="is-flex" style="width: 100%">
-                <div class="request-editor__form-label">Name</div>
-                <input class="input is-minimal mousetrap"
-                       type="text"
-                       placeholder="Name"
-                       title="Title"
-                       v-model="editedPrecept.name"
-                       @input="isClean = false"
-                >
-            </div>
+            <input class="input is-minimal is-fullwidth mousetrap"
+                   style="height: 18px; font-size: 12px; font-weight: 400"
+                   type="text"
+                   placeholder="..."
+                   title="Title"
+                   v-model="editedPrecept.name"
+                   @input="isClean = false"
+            >
         </div>
 
         <div style="height: 20px; background-color: #ebebeb"></div>
@@ -117,7 +113,7 @@
   import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
   import vmMethodSelector from './method-selector/method-selector.vue'
   import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
-  import vmTypeAhead from '../../ligth-components/full-type-ahead.vue'
+  import vmRuleTypeAhead from './rule-type-ahead.vue'
 
   export default {
     data () {
@@ -139,7 +135,7 @@
       vmJsonEditor,
       vmMethodSelector,
       vmNavigationTabs,
-      vmTypeAhead,
+      vmRuleTypeAhead,
     },
     created(){
       this.refreshFromParent()

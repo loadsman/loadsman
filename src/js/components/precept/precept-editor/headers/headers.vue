@@ -2,11 +2,12 @@
     <div class="headers">
         <vm-header
                 v-for="(header, index) in headers.items"
+                :key="index"
                 :header="header"
-                @remove="headers.items.splice(index, 1), sendHeadersToParent()"
+                @remove="removeHeader(index, $event.field)"
         ></vm-header>
         <vm-header-create
-                @click="addNewHeader($event.field)"
+                @create="addNewHeader($event.field)"
         ></vm-header-create>
     </div>
 </template>
@@ -20,7 +21,6 @@
 
   import vmHeader from './header.vue'
   import vmHeaderCreate from './header-create.vue'
-
 
   export default {
     data (){
@@ -39,12 +39,30 @@
       }
     },
     methods: {
+      removeHeader(index, field){
+        this.headers.items.splice(index, 1)
+        this.sendHeadersToParent()
+        this.focusTo(index, field)
+      },
       addNewHeader (field){
         this.value.items.push(new Header())
         this.sendHeadersToParent()
+
+        // Focus on newly created header
+        this.focusTo(this.headers.items.length - 1, field)
+      },
+      focusTo(pointer: Number, field){
         setTimeout(() => {
-          // Focus on newly created header
-          $(this.$el).find('.precept-header input[name="' + field + '"]').last().select()
+          let headerElement = this.headers.items[pointer]
+
+          if (!headerElement) {
+            headerElement = this.headers.items[pointer -=1]
+          }
+
+          if (headerElement) {
+            $(this.$el.children[pointer])
+                .find('input[name="header-' + field + '"]').first().select()
+          }
         })
       },
       sendHeadersToParent(){

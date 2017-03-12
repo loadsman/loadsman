@@ -8,6 +8,9 @@ export default class HeaderCollection {
   toObject(): Object {
     let headers = {}
     this.items.forEach((header: Header) => {
+      if (! header.key){
+        return
+      }
       headers[header.key] = header.value
     })
     return headers

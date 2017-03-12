@@ -25,7 +25,12 @@ class AjaxOptions {
   }
 
   getFullUrl(){
-    return this.baseURL + this.url
+    let url = this.baseURL + this.url
+    if (url === '//'){
+      url = '/'
+    }
+
+    return url
   }
 
   methodIsGet(){

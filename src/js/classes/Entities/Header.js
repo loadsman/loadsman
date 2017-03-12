@@ -3,7 +3,6 @@ class Header {
     this.key = key
     this.value = value
   }
-
   isEmpty(): boolean {
     return (!(this.key || this.value))
   }

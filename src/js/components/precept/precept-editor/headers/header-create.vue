@@ -3,16 +3,16 @@
         <input class="input is-minimal"
                placeholder="Key"
                title="Key"
-               @click.prevent="$emit('click', {field: 'key'})"
+               @focus.prevent="$emit('create', {field: 'key'})"
+               @click.prevent="$emit('create', {field: 'key'})"
         >
         <input class="input is-minimal"
                placeholder="Value"
                title="Value"
-               @click.prevent="$emit('click', {field: 'value'})"
+               @focus.prevent="$emit('create', {field: 'value'})"
+               @click.prevent="$emit('create', {field: 'value'})"
         >
-        <div class="large-button is-inverted square-32"
-             @click="$emit('remove')"
-        ></div>
+        <div class="large-button is-inverted square-32"></div>
     </div>
 </template>
 

@@ -10,7 +10,7 @@ class FetchAdapter extends AbstractAdapter {
       body: this.getData(options),
       credentials: options.credentials ? 'include' : false,
     }
-    console.log(options)
+    console.log(init)
 
     let promise = fetch(this.getInput(options), init)
 

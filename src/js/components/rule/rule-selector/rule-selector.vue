@@ -29,7 +29,8 @@
         </div>
 
         <div class="rule-selector__rules">
-            <vm-rule v-for="rule in rules"
+            <vm-rule v-for="(rule, index) in rules"
+                     :key="index"
                      @selected="selectRule(rule)"
                      :rule="rule"
             ></vm-rule>

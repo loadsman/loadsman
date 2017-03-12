@@ -6,30 +6,38 @@
                v-model="editedValue"
                @input="sendToParent"
                @focus="mode = 'active'"
-               @blur="blur"
                @keydown.self="mode = 'active'"
-               @keydown.self.down.prevent="movePointer(1)"
-               @keydown.self.up.prevent="movePointer(-1)"
-               @keydown.self.enter.prevent="selectPointed"
-               @keydown.self.pageDown.prevent="movePointer(10)"
-               @keydown.self.pageUp.prevent="movePointer(-10)"
-               @keyup.esc="blur"
+
+               @keydown.self.prevent.enter="selectPointed()"
+               @keydown.self.prevent.down="movePointer(1)"
+               @keydown.self.prevent.up="movePointer(-1)"
+               @keydown.self.prevent.pageDown="movePointer(10)"
+               @keydown.self.prevent.pageUp="movePointer(-10)"
+               @keydown.self.prevent.ctrl.end="movePointer(999999)"
+               @keydown.self.prevent.ctrl.home="movePointer(-999999)"
+               @keyup.self.esc="blur"
+               @keyup.self.tab="blur"
+               @blur.self="blur"
         >
+
         <div v-if="mode === 'active'"
              class="type-ahead-form__container"
         >
             <vm-type-ahead
                     ref="typeAhead"
-                    :track-by="trackBy"
                     :options="filteredOptions"
-                    @selected="editedValue = $event, blur(), sendToParent()"
-            ></vm-type-ahead>
+                    @selected="editedValue = $event.uri, blur(), sendToParent($event.uri)"
+            >
+                <template scope="props">
+                    {{ props.option.uri }}
+                </template>
+            </vm-type-ahead>
         </div>
     </div>
 </template>
 
 <script>
-  import vmTypeAhead from './type-ahead/type-ahead.vue'
+  import vmTypeAhead from '../../ligth-components/type-ahead/type-ahead-list.vue'
 
   export default {
     components: {
@@ -79,16 +87,14 @@
         this.$refs.typeAhead.selectPointed()
       },
       blur(){
-        setTimeout(() => {
-          this.mode = 'idle'
-        })
-      }
+        this.mode = 'idle'
+      },
     },
     computed: {
       filteredOptions(){
         this.editedValue
         return this.options.filter((option) => {
-          return option[this.trackBy].includes(this.editedValue)
+          return option.uri.includes(this.editedValue)
         })
       }
     }
