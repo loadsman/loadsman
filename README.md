@@ -1,5 +1,9 @@
 Hi, Loadsman here.
 
+## Install
+
+* [Chrome app store](https://chrome.google.com/webstore/detail/cioeodjdpjdfcgbakmhbmnnnnkoaflfk/publish-delayed)
+
 ## Intention
 Loadsman is a chrome extension with plugin ecosystem that allows manual tinkering of routes.
 Think of [Postman](https://www.getpostman.com/) with framework integration.

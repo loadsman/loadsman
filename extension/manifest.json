@@ -1,8 +1,8 @@
 {
     "name": "Loadsman",
-    "version": "0.0.4",
+    "version": "0.0.5",
     "manifest_version": 2,
-    "description": "This is loadsman",
+    "description": "List your routes, no matter which server technology you use.",
     "permissions": ["storage", "activeTab", "tabs"],
     "browser_action": {
         "default_icon": "icon.png"
