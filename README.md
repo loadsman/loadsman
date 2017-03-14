@@ -22,5 +22,3 @@ Every piece of data is stored in your browser (local storage, indexed db, extens
 * [Ace editor](https://ace.c9.io/)
 * [Vue.js 2](https://vuejs.org/)
   
-Chrome extension includes background script, injected script and iframe. We already have communication established between those. Mostly, things will happen in iframe though. Compiled scripts reside in there. Requests will be handled by axios. Our iframe doesn't trigger any sort of CORS protection and follows original page cookies.
-  
