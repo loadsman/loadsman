@@ -56,12 +56,14 @@
           let headerElement = this.headers.items[pointer]
 
           if (!headerElement) {
-            headerElement = this.headers.items[pointer -=1]
+            headerElement = this.headers.items[pointer -= 1]
           }
 
           if (headerElement) {
             $(this.$el.children[pointer])
-                .find('input[name="header-' + field + '"]').first().select()
+                .find('input[name="header-' + field + '"]')
+                .first()
+                .select()
           }
         })
       },

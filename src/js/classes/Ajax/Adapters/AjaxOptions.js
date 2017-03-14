@@ -16,7 +16,7 @@ class AjaxOptions {
   constructor() {
     this.url = ''
     this.method = 'GET'
-    this.baseURL = '/'
+    this.baseURL = ''
     this.interceptRequest = []
     this.interceptResponse = []
     this.headers = {}
@@ -26,9 +26,6 @@ class AjaxOptions {
 
   getFullUrl(){
     let url = this.baseURL + this.url
-    if (url === '//'){
-      url = '/'
-    }
 
     return url
   }
