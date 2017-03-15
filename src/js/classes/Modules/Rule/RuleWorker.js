@@ -6,11 +6,10 @@ export default class RuleWorker {
   constructor(){
     this.ruleCollection = new RuleCollection()
     this.ruleObserver = new ObserverSpawner().getRuleObserver()
-    this.refreshList()
   }
 
   refreshList(){
-    this.ruleObserver.send('get-many').then(({data}) => {
+    return this.ruleObserver.send('get-many').then(({data}) => {
       let rules: Array<Rule> = data.map((rule) => {
         return Object.assign(new Rule, rule)
       })

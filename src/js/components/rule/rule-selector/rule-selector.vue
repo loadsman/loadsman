@@ -1,18 +1,14 @@
 <template>
     <div class="rule-selector">
         <div class="rule-selector__action-panel">
-
             <div class="button is-small"
                  @click="refresh"
-                 :class="{'is-loading' : loading}"
+                 :class="{'is-loading': loading}"
             >
                 <div class="icon is-small">
                     <i class="fa fa-refresh"></i>
                 </div>
             </div>
-            <input type="text" class="input"
-                   placeholder="Search doesn't work yet"
-            >
         </div>
         <div class="routes-selector__notifications">
             <div class="notification"

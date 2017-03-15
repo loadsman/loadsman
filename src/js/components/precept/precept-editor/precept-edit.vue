@@ -138,9 +138,10 @@
       vmRuleTypeAhead,
     },
     created(){
+      this.bindKeys()
       this.refreshFromParent()
 
-      this.bindKeys()
+      ruleWorker.refreshList()
     },
     beforeDestroy(){
       this.unbindKeys()

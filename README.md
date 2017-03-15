@@ -4,7 +4,7 @@ Hi, Loadsman here.
 
 ## Install
 
-* [Chrome app store](https://chrome.google.com/webstore/detail/cioeodjdpjdfcgbakmhbmnnnnkoaflfk/publish-delayed)
+* [Chrome app store](https://chrome.google.com/webstore/detail/loadsman/cioeodjdpjdfcgbakmhbmnnnnkoaflfk)
 
 ## Demo
 
