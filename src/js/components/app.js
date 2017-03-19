@@ -6,5 +6,4 @@ Vue.config.keyCodes.pageDown = 34
 Vue.config.keyCodes.end = 35
 Vue.config.keyCodes.home = 36
 
-let app = Vue.extend(vmApp)
-new app().$mount('#app')
+new Vue(vmApp).$mount('#app')
