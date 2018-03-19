@@ -13,7 +13,6 @@ class AjaxObserversFactory {
   }
 
   createObserver(options: Object = {}): AjaxObserver {
-
     let send = (ajaxOptions: AjaxOptions) => {
       return this._adapter.send(ajaxOptions)
     }
