@@ -22,10 +22,10 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
   import vmJsonEditor from '../../ligth-components/json-editor/json-editor.vue'
-  import Response from '../../../classes/Entities/Response.js'
+  import Response from '../../../classes/Entities/Response.ts'
 
   export default {
     data () {

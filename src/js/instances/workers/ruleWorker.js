@@ -1,3 +1,3 @@
-import RuleWorker from '../../classes/Modules/Rule/RuleWorker.js'
+import RuleWorker from '../../classes/Modules/Rule/RuleWorker.ts'
 
 export default new RuleWorker()

@@ -22,8 +22,8 @@
     </div>
 </template>
 
-<script>
-  import Project from '../../../classes/Entities/Project.js'
+<script lang="ts">
+  import Project from '../../../classes/Entities/Project.ts'
 
   import projectWorker from '../../../instances/workers/projectWorker.js'
 
@@ -54,6 +54,6 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
 
 </style>

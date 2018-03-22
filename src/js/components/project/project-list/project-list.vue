@@ -17,8 +17,8 @@
 </template>
 
 <script>
-  import Project from '../../../classes/Entities/Project.js'
-  import ProjectCollection from '../../../classes/Modules/Project/ProjectCollection.js'
+  import Project from '../../../classes/Entities/Project.ts'
+  import ProjectCollection from '../../../classes/Modules/Project/ProjectCollection.ts'
 
   import projectWorker from '../../../instances/workers/projectWorker.js'
 

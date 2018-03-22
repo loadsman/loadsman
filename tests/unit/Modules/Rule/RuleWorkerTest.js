@@ -1,6 +1,6 @@
-import RuleWorker from '../../../../src/js/classes/Modules/Rule/RuleWorker.js'
-import RuleCollection from '../../../../src/js/classes/Modules/Rule/RuleCollection.js'
-import AjaxObserver from '../../../../src/js/classes/Ajax/AjaxObserver.js'
+import RuleWorker from '../../../../src/js/classes/Modules/Rule/RuleWorker.ts'
+import RuleCollection from '../../../../src/js/classes/Modules/Rule/RuleCollection.ts'
+import AjaxObserver from '../../../../src/js/classes/Ajax/AjaxObserver.ts'
 
 describe('RuleWorker', () => {
   let ruleWorker = new RuleWorker

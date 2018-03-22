@@ -98,14 +98,14 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import _ from 'lodash'
   import Mousetrap from 'mousetrap'
 
   import preceptStorage from '../../../instances/preceptStorage.js'
   import ruleWorker from '../../../instances/workers/ruleWorker.js'
 
-  import Precept from '../../../classes/Entities/Precept.js'
+  import Precept from '../../../classes/Entities/Precept'
 
   import vmHeaders from './headers/headers.vue'
   import vmResponseViewer from '../response-viewer/response-viewer.vue'
@@ -184,9 +184,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
-    @import "~local-styles";
-
+<style lang="scss">
     .request-editor {
         &__form-label {
             flex: 0 0 70px;

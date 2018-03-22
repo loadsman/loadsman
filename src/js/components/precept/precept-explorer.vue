@@ -49,10 +49,10 @@
     </div>
 </template>
 
-<script>
-  import Precept from '../../classes/Entities/Precept.js'
+<script lang="ts">
+  import Precept from '../../classes/Entities/Precept'
   import Response from '../../classes/Entities/Response.js'
-  import PreceptSender from '../../classes/Modules/Precept/PreceptSender.js'
+  import PreceptSender from '../../classes/Modules/Precept/PreceptSender.ts'
 
   import vmPreceptList from './precept-selector/precept-list.vue'
   import vmPreceptEdit from './precept-editor/precept-edit.vue'
@@ -74,30 +74,30 @@
       vmResponseViewer,
     },
     methods: {
-      createPrecept(){
+      createPrecept () {
         let precept = new Precept()
         preceptWorker.addPrecept(precept)
         this.setCurrentPrecept(precept)
       },
-      setCurrentPrecept(precept: ?Precept){
+      setCurrentPrecept (precept: Precept | null) {
         preceptWorker.currentPrecept = precept
       },
-      send(precept: Precept){
+      send (precept: Precept) {
         this.preceptSender.send(precept).then((response: Response) => {
           this.currentResponse = response
         })
       },
-      updated (precept: Precept){
+      updated (precept: Precept) {
         preceptWorker.saveAllPrecepts()
       },
-      remove (precept: Precept){
+      remove (precept: Precept) {
         this.setCurrentPrecept(null)
         preceptWorker.removePrecept(precept)
-      }
+      },
     },
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
 
 </style>

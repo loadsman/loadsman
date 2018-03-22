@@ -1,3 +1,3 @@
-import ProjectWorker from '../../classes/Modules/Project/ProjectWorker.js'
+import ProjectWorker from '../../classes/Modules/Project/ProjectWorker.ts'
 
 export default new ProjectWorker

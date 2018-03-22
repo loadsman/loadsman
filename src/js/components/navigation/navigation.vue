@@ -36,7 +36,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import localRouter from '../../instances/localRouter.js'
 
   import vmNavigationItem from './navigation-item.vue'
@@ -53,7 +53,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .navigation {
         display: flex;
         flex-direction: column;

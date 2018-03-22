@@ -49,9 +49,9 @@
 </template>
 
 
-<script>
-  import Precept from '../../classes/Entities/Precept.js'
-  import PreceptRepository from '../../classes/Modules/Precept/PreceptRepository.js'
+<script lang="ts">
+  import Precept from '../../classes/Entities/Precept'
+  import PreceptRepository from '../../classes/Modules/Precept/PreceptRepository.ts'
 
   import vmPreceptVerbSelect from './precept-verb-select.vue'
 

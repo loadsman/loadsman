@@ -12,13 +12,13 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   export default {
     props: ['title', 'active']
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     @import "~local-styles";
 
     $size: 40px;

@@ -2,7 +2,7 @@
     <div class="json-viewer"></div>
 </template>
 
-<script>
+<script lang="ts">
   import jsoneditor from 'jsoneditor'
 
   export default {

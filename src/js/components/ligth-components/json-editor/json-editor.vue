@@ -8,7 +8,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import ace from './ace-editor/ace-editor'
 
   import jsoneditor from 'jsoneditor/dist/jsoneditor'

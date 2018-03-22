@@ -23,7 +23,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import _ from 'lodash'
 
   import vmPrecept from './precept.vue'

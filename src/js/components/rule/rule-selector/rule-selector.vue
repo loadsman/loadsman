@@ -35,9 +35,9 @@
 </template>
 
 
-<script>
+<script lang="ts">
   import _ from 'lodash'
-  import Rule from '../../../classes/Entities/Rule.js'
+  import Rule from '../../../classes/Entities/Rule.ts'
 
   import ruleWorker from '../../../instances/workers/ruleWorker.js'
 

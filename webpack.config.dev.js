@@ -2,6 +2,7 @@ var path = require('path')
 var webpack = require('webpack')
 
 module.exports = {
+  mode: 'development',
   entry: './src/main.js',
   output: {
     path: path.resolve(__dirname, './public/build'),
@@ -26,7 +27,7 @@ module.exports = {
       },
       {
         test: /\.css$/,
-        loader: ['style-loader', 'css-loader']
+        loader: ['style-loader', 'css-loader'],
       },
       {
         test: /\.vue$/,
@@ -38,9 +39,9 @@ module.exports = {
             // other preprocessors should work out of the box, no loader config like this nessessary.
             scss: 'vue-style-loader!css-loader!sass-loader',
             sass: 'vue-style-loader!css-loader!sass-loader?indentedSyntax',
-          }
+          },
           // other vue-loader options go here
-        }
+        },
       },
       {
         test: /\.js$/,
@@ -51,14 +52,14 @@ module.exports = {
         test: /\.(png|jpg|gif|svg)$/,
         loader: 'file-loader',
         options: {
-          name: '[name].[ext]?[hash]'
-        }
+          name: '[name].[ext]?[hash]',
+        },
       },
       {
         test: /\.woff($|\?)|\.woff2($|\?)|\.ttf($|\?)|\.eot($|\?)|\.svg($|\?)/,
-        loader: 'url-loader?limit=100000'
-      }
-    ]
+        loader: 'url-loader?limit=100000',
+      },
+    ],
   },
   resolve: {
     alias: {
@@ -66,7 +67,7 @@ module.exports = {
     },
   },
   devServer: {
-    contentBase: path.join(__dirname, "extension"),
+    contentBase: path.join(__dirname, 'extension'),
     noInfo: true,
     proxy: [
       {
@@ -77,20 +78,20 @@ module.exports = {
         cookieDomainRewrite: '',
         onProxyReq: function (request, req, res) {
           request.setHeader('origin', 'http://utility.pr4.local')
-        }
-      }
-    ]
+        },
+      },
+    ],
   },
   performance: {
-    hints: false
+    hints: false,
   },
   plugins: [
     new webpack.DefinePlugin({
       'process.env': {
-        NODE_ENV: '"develop"'
-      }
+        NODE_ENV: '"develop"',
+      },
     }),
     new webpack.NamedModulesPlugin(),
   ],
-  devtool: '#eval-source-map'
+  devtool: '#eval-source-map',
 }

@@ -5,27 +5,27 @@
                 :key="index"
                 :header="header"
                 @remove="removeHeader(index, $event.field)"
-        ></vm-header>
+        />
         <vm-header-create
                 @create="addNewHeader($event.field)"
-        ></vm-header-create>
+        />
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import _ from 'lodash'
   import $ from 'jquery'
 
-  import Header from '../../../../classes/Entities/Header.js'
-  import HeaderCollection from '../../../../classes/Modules/Header/HeaderCollection.js'
+  import Header from '../../../../classes/Entities/Header.ts'
+  import HeaderCollection from '../../../../classes/Modules/Header/HeaderCollection.ts'
 
   import vmHeader from './header.vue'
   import vmHeaderCreate from './header-create.vue'
 
   export default {
-    data (){
+    data () {
       return {
-        editedHeaders: _.cloneDeep(this.value)
+        editedHeaders: _.cloneDeep(this.value),
       }
     },
     components: {
@@ -35,23 +35,23 @@
     props: {
       value: {
         type: HeaderCollection,
-        required: true
-      }
+        required: true,
+      },
     },
     methods: {
-      removeHeader(index, field){
+      removeHeader (index, field) {
         this.headers.items.splice(index, 1)
         this.sendHeadersToParent()
         this.focusTo(index, field)
       },
-      addNewHeader (field){
+      addNewHeader (field) {
         this.value.items.push(new Header())
         this.sendHeadersToParent()
 
         // Focus on newly created header
         this.focusTo(this.headers.items.length - 1, field)
       },
-      focusTo(pointer: Number, field){
+      focusTo (pointer: number, field) {
         setTimeout(() => {
           let headerElement = this.headers.items[pointer]
 
@@ -61,21 +61,21 @@
 
           if (headerElement) {
             $(this.$el.children[pointer])
-                .find('input[name="header-' + field + '"]')
-                .first()
-                .select()
+              .find('input[name="header-' + field + '"]')
+              .first()
+              .select()
           }
         })
       },
-      sendHeadersToParent(){
+      sendHeadersToParent () {
         this.$emit('input', this.headers)
-      }
+      },
     },
     computed: {
-      headers (){
+      headers () {
         return this.value
-      }
-    }
+      },
+    },
   }
 </script>
 

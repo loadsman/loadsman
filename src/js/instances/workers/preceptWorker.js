@@ -1,3 +1,3 @@
-import PreceptWorker from '../../classes/Modules/Precept/PreceptWorker.js'
+import PreceptWorker from '../../classes/Modules/Precept/PreceptWorker.ts'
 
 export default new PreceptWorker()

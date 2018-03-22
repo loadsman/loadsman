@@ -1,3 +1,3 @@
-import IframeListener from '../classes/Modules/Communication/IframeListener.js'
+import IframeListener from '../classes/Modules/Communication/IframeListener.ts'
 
 export default new IframeListener

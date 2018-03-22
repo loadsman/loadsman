@@ -28,10 +28,8 @@
     </form>
 </template>
 
-<script>
-  import _ from 'lodash'
-
-  import Header from '../../../../classes/Entities/Header.js'
+<script lang="ts">
+  import Header from '../../../../classes/Entities/Header.ts'
 
   export default {
     data (){

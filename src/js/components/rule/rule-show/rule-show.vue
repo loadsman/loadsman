@@ -31,8 +31,8 @@
 </template>
 
 <script>
-  import Rule from '../../../classes/Entities/Rule.js'
-  import RuleToPreceptTransformer from '../../../classes/Modules/Precept/RuleToPreceptTransformer.js'
+  import Rule from '../../../classes/Entities/Rule.ts'
+  import RuleToPreceptTransformer from '../../../classes/Modules/Precept/RuleToPreceptTransformer.ts'
 
   import preceptWorker from '../../../instances/workers/preceptWorker.js'
   import preceptStorage from '../../../instances/preceptStorage.js'

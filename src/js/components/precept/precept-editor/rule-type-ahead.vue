@@ -36,7 +36,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import vmTypeAhead from '../../ligth-components/type-ahead/type-ahead-list.vue'
 
   export default {

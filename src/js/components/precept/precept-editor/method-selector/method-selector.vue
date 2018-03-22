@@ -6,8 +6,8 @@
     </select>
 </template>
 
-<script>
-  import Precept from '../../../../classes/Entities/Precept.js'
+<script lang="ts">
+  import Precept from '../../../../classes/Entities/Precept'
 
   export default {
     data () {

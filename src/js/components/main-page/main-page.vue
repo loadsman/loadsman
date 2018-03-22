@@ -35,10 +35,10 @@
     </div>
 </template>
 
-<script>
-  import RuleObserverFactory from '../../classes/Ajax/ObserverSpawner.js'
+<script lang="ts">
+  import RuleObserverFactory from '../../classes/Ajax/ObserverSpawner.ts'
 
-  import Framework from '../../classes/Entities/Framework.js'
+  import Framework from '../../classes/Entities/Framework'
   import vmFrameworkShow from './framework/framework-show.vue'
   import vmCurrentProject from './project/current-project.vue'
 
@@ -79,7 +79,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .main-page {
         padding: 10px;
     }

@@ -27,8 +27,8 @@
     </table>
 </template>
 
-<script>
-  import Framework from '../../../classes/Entities/Framework.js'
+<script lang="ts">
+  import Framework from '../../../classes/Entities/Framework'
 
   export default {
     props: {
@@ -40,6 +40,6 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
 
 </style>
