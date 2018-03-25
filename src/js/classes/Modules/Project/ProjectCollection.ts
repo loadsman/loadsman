@@ -1,4 +1,4 @@
-import Project from '../../Entities/Project.js'
+import Project from '../../Entities/Project'
 
 export default class ProductCollection {
   projects: Project[] = []

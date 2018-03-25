@@ -1,4 +1,4 @@
-import Header from '../../Entities/Header.js'
+import Header from '../../Entities/Header'
 
 export default class HeaderCollection {
   items: Header[]

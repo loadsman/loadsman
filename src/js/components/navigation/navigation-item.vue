@@ -19,8 +19,6 @@
 </script>
 
 <style lang="scss">
-    @import "~local-styles";
-
     $size: 40px;
     $fontColor: rgb(0, 102, 121);
 

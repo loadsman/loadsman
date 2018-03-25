@@ -26,7 +26,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     $lineHeight: 28px;
 
     .rule {

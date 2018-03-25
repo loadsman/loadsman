@@ -1,4 +1,4 @@
-import Rule from '../../Entities/Rule.js'
+import Rule from '../../Entities/Rule'
 import Precept from '../../Entities/Precept'
 
 export default class RuleToPreceptTransformer {

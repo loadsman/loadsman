@@ -24,7 +24,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import vmRuleSelector from './rule-selector/rule-selector.vue'
   import vmRuleShow from './rule-show/rule-show.vue'
 
@@ -41,7 +41,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .rule-explorer {
         height: 100%;
         .rule-explorer__body {

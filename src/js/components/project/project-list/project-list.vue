@@ -16,7 +16,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import Project from '../../../classes/Entities/Project.ts'
   import ProjectCollection from '../../../classes/Modules/Project/ProjectCollection.ts'
 
@@ -54,7 +54,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .project-list {
         padding: 10px;
     }

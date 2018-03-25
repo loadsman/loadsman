@@ -101,7 +101,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .type-ahead-form {
         position: relative;
         &__container {

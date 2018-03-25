@@ -7,7 +7,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import * as actions from  '../vuex/api-actions'
 
     export default {

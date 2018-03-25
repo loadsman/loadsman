@@ -10,12 +10,14 @@ const extractor = new ExtractTextPlugin({
   disable: isDevelop,
 })
 
+console.log('path', path.resolve(__dirname, './../../../src/sass/loadsman.scss'))
+
 exports.extractor = extractor
 
 exports.main = {
   rules: [
     {
-      test: /\.s(a|c)ss$/,
+      test: /\.scss$/,
       use: extractor.extract({
         use: [
           { loader: 'css-loader' },
@@ -45,7 +47,7 @@ exports.main = {
               {
                 loader: 'sass-resources-loader',
                 options: {
-                  resources: path.resolve(__dirname, 'src/sass/loadsman.sass'),
+                  resources: path.resolve(__dirname, './../../../src/sass/loadsman.scss'),
                 },
               },
             ],

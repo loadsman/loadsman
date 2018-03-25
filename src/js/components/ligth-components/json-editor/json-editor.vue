@@ -118,8 +118,8 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
-    @import "~local-styles";
+<style lang="scss">
+    /*@import "~local-styles";*/
 
     .json-editor {
         resize: vertical;

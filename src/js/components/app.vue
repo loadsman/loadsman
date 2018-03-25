@@ -15,7 +15,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
 
   import localRouter from '../instances/localRouter.js'
   import projectWorker from '../instances/workers/projectWorker.js'
@@ -30,10 +30,10 @@
   import vmProjectExplorer from './project/project-explorer.vue'
 
   export default {
-    created(){
+    created () {
       projectWorker.refreshList()
     },
-    data (){
+    data () {
       return {
         projectWorker,
         localRouter,
@@ -49,16 +49,14 @@
       vmProjectExplorer,
     },
     methods: {
-      closeIframe (){
+      closeIframe () {
         iframeListener.sendCommand('closeIframe')
       },
     },
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
-    @import "~local-styles";
-
+<style lang="scss">
     .loadsman-app {
         .loadsman-app__navigation {
             position: fixed;

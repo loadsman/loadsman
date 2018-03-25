@@ -9,7 +9,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import vmMethodButton from '../ligth-components/method-button.vue'
     import _ from 'lodash'
     import moment from 'moment'

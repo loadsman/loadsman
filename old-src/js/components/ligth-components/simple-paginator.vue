@@ -40,7 +40,7 @@
 </template>
 
 
-<script>
+<script lang="ts">
     import _ from 'lodash'
 
     export default {
@@ -93,7 +93,7 @@
 </script>
 
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     @import '~bulma';
 
     .simple-paginator__container {

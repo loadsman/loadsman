@@ -1,4 +1,4 @@
-import Storage from '../../Storage/Storage.js'
+import Storage from '../../Storage/Storage'
 
 import uniqid from 'uniqid'
 

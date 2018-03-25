@@ -45,7 +45,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .response-viewer__iframe {
         width: 100%;
         height: 0;

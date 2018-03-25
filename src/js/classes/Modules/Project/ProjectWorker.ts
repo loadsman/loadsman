@@ -3,11 +3,12 @@ import ProjectCollection from './ProjectCollection'
 import ObserverSpawner from '../../Ajax/ObserverSpawner'
 
 import preceptWorker from '../../../instances/workers/preceptWorker'
+import AjaxObserver from '../../Ajax/AjaxObserver'
 
 export default class ProjectWorker {
-  currentProject
-  projectCollection
-  projectObserver
+  currentProject: Project | null
+  projectCollection: ProjectCollection
+  projectObserver: AjaxObserver
 
   constructor () {
     this.currentProject = null
@@ -16,13 +17,17 @@ export default class ProjectWorker {
   }
 
   refreshList () {
+    console.log('this.projectObserver', this.projectObserver)
     this.projectObserver.send({ method: 'get', data: 'projects' })
-      .then((projects: any[] = []) => {
+      .then((projects: any[] | null = []) => {
+        if (!projects) {
+          return []
+        }
         return projects.map((project) => {
           return Object.assign(new Project(), project)
         })
       })
-      .then((projects: Project[]) => {
+      .then((projects: Project[] = []) => {
         this.projectCollection.setProjects(projects)
         this.refreshCurrentProject()
         this.loadCurrentProjectPrecepts()

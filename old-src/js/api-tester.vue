@@ -60,7 +60,7 @@ Application main page.
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import vmActionPanel from '../../src/js/components/action-panel/action-panel.vue'
 
   import projectWorker from '../../src/js/instances/workers/projectWorker.js'

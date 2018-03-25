@@ -16,7 +16,7 @@
     </p>
 </template>
 
-<script>
+<script lang="ts">
     export default {
         methods: {
             monitorSearch (e){

@@ -51,7 +51,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import vmNavigationTabs from '../../ligth-components/navigation-tabs.vue'
     import vmJsonViewer from '../../json-editor/json-viewer.vue'
 

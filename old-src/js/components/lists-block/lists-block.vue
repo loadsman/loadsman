@@ -13,7 +13,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import vmNavigationTabs from '../ligth-components/navigation-tabs.vue'
     import vmRoutesSelector from '../routes/routes-selector.vue'
     import vmRequestsSelector from '../requests/requests-selector.vue'

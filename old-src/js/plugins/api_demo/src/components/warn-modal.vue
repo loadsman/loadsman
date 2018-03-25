@@ -29,7 +29,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
     import {removeUrlToWarn} from '../vuex/api-actions.js'
 
     export default {

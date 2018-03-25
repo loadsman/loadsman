@@ -23,7 +23,7 @@
 </template>
 
 
-<script>
+<script lang="ts">
     import _ from 'lodash'
 
     import vmMoment from './moment.vue'

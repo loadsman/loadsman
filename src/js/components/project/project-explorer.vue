@@ -12,7 +12,7 @@
 </template>
 
 
-<script>
+<script lang="ts">
   import iframeListener from '../../instances/iframeListener.js'
 
   import vmProjectList from './project-list/project-list.vue'
@@ -27,7 +27,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .project-explorer {
 
     }

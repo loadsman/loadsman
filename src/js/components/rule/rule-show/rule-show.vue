@@ -30,7 +30,7 @@
     </div>
 </template>
 
-<script>
+<script lang="ts">
   import Rule from '../../../classes/Entities/Rule.ts'
   import RuleToPreceptTransformer from '../../../classes/Modules/Precept/RuleToPreceptTransformer.ts'
 
@@ -58,6 +58,6 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
 
 </style>

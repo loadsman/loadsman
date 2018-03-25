@@ -2,7 +2,7 @@
     <a class="method-button button is-small"></a>
 </template>
 
-<script>
+<script lang="ts">
 
 </script>
 

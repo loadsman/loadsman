@@ -75,7 +75,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .rule-selector {
         .rule-selector__action-panel {
 

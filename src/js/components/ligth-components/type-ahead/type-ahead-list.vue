@@ -67,7 +67,7 @@
   }
 </script>
 
-<style lang="scss" rel="stylesheet/scss">
+<style lang="scss">
     .type-ahead-list {
         &__item {
             height: 26px;
